@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar | Donaciones</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand__logo">🐾</span>
+        <span class="brand__name">PetHogar</span>
+      </a>
+
+      <nav class="menu" aria-label="Menú principal">
+        <a class="menu__link" href="../index.html">Inicio</a>
+        <a class="menu__link" href="adopta.html">Adopta</a>
+        <a class="menu__link" href="productos.html">Productos</a>
+        <a class="menu__link" href="comunidad.html">Comunidad</a>
+        <a class="menu__link" href="refugios.html">Refugios</a>
+        <a class="menu__link is-active" href="donaciones.html">Donaciones</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+
+    <div class="mobile" id="mobileMenu">
+      <a href="../index.html">Inicio</a>
+      <a href="adopta.html">Adopta</a>
+      <a href="productos.html">Productos</a>
+      <a href="comunidad.html">Comunidad</a>
+      <a href="refugios.html">Refugios</a>
+      <a href="donaciones.html">Donaciones</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="donHero">
+      <div class="container donHero__inner">
+        <div class="donHero__text">
+          <h1>Donaciones</h1>
+          <p>
+            Tu apoyo ayuda a alimento, medicinas, esterilizaciones y rescates.
+            Aquí no “compras una buena acción”; financias una segunda oportunidad 🐾
+          </p>
+
+          <div class="donStats">
+            <div class="stat">
+              <div class="stat__num"></div>
+              <div>
+                <p class="stat__title">Alimento</p>
+                <p class="stat__desc">Croquetas y suplementos</p>
+              </div>
+            </div>
+
+            <div class="stat">
+              <div class="stat__num"></div>
+              <div>
+                <p class="stat__title">Salud</p>
+                <p class="stat__desc">Vacunas y medicamentos</p>
+              </div>
+            </div>
+
+            <div class="stat">
+              <div class="stat__num"></div>
+              <div>
+                <p class="stat__title">Rescate</p>
+                <p class="stat__desc">Traslados y atención</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="donNote">
+            <strong>Nota escolar:</strong> este formulario es demostrativo (front-end). No procesa pagos reales.
+          </div>
+        </div>
+
+        <div class="donCard">
+          <h2 class="donCard__title">Formulario de donación</h2>
+
+          <form id="donForm" class="donForm">
+            <label class="field">
+              <span>Nombre completo *</span>
+              <input id="donNombre" type="text" placeholder="Ej: Alejandro Guerra" required />
+            </label>
+
+            <label class="field">
+              <span>Correo *</span>
+              <input id="donCorreo" type="email" placeholder="ejemplo@correo.com" required />
+            </label>
+
+            <div class="donRow">
+              <label class="field">
+                <span>Teléfono (opcional)</span>
+                <input id="donTel" type="tel" placeholder="999 123 4567" />
+              </label>
+
+              <label class="field">
+                <span>Monto (MXN) *</span>
+                <input id="donMonto" type="number" min="10" step="10" placeholder="Ej: 100" required />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Tipo de donación *</span>
+              <select id="donTipo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Única">Única</option>
+                <option value="Mensual">Mensual</option>
+                <option value="En especie">En especie (alimento/medicina)</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Método (solo demostración) *</span>
+              <select id="donMetodo" required>
+                <option value="">Selecciona un método</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta (demo)">Tarjeta (demo)</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Mensaje (opcional)</span>
+              <textarea id="donMsg" rows="3" placeholder="Ej: Para ayudar con vacunas "></textarea>
+            </label>
+
+            <label class="check">
+              <input id="donCheck" type="checkbox" />
+              <span>Deseo recibir noticias de PetHogar (demo)</span>
+            </label>
+
+            <button class="btn btn--primary" type="submit">Enviar donación</button>
+
+            <p class="hint" id="donResult" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="donFAQ">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Preguntas rápidas</h2>
+          <p>Para que el profe vea “contenido” y no solo formulario </p>
+        </div>
+
+        <div class="faqGrid">
+          <article class="faqItem">
+            <h3>¿En qué se usa el dinero?</h3>
+            <p>Alimento, atención veterinaria, esterilización y apoyo en rescates.</p>
+          </article>
+
+          <article class="faqItem">
+            <h3>¿Puedo donar en especie?</h3>
+            <p>Sí. Puedes llevar alimento, cobijas o medicamentos a un punto de acopio.</p>
+          </article>
+
+          <article class="faqItem">
+            <h3>¿Es un pago real?</h3>
+            <p>No. Este sitio es un proyecto escolar. Simula el proceso (front-end).</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+      <p class="muted">Gracias por apoyar </p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

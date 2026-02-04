@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar | Comunidad</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand__logo">🐾</span>
+        <span class="brand__name">PetHogar</span>
+      </a>
+
+      <nav class="menu" aria-label="Menú principal">
+        <a class="menu__link" href="../index.html">Inicio</a>
+        <a class="menu__link" href="adopta.html">Adopta</a>
+        <a class="menu__link" href="productos.html">Productos</a>
+        <a class="menu__link is-active" href="comunidad.html">Comunidad</a>
+        <a class="menu__link" href="refugios.html">Refugios</a>
+        <a class="menu__link" href="donaciones.html">Donaciones</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+
+    <div class="mobile" id="mobileMenu">
+      <a href="../index.html">Inicio</a>
+      <a href="adopta.html">Adopta</a>
+      <a href="productos.html">Productos</a>
+      <a href="comunidad.html">Comunidad</a>
+      <a href="refugios.html">Refugios</a>
+      <a href="donaciones.html">Donaciones</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="aboutHero">
+      <div class="container aboutHero__inner">
+        <div class="aboutHero__text">
+          <h1>Comunidad PetHogar</h1>
+          <p>
+            Somos una iniciativa enfocada en la adopción responsable y el bienestar animal.
+            Aquí creemos que un rescate no termina en “salvarlo”, sino en darle un hogar seguro.
+          </p>
+
+          <div class="aboutPills">
+            <span class="pill"> Adopción responsable</span>
+            <span class="pill"> Comunidad</span>
+            <span class="pill pill--accent"> Apoyo a refugios</span>
+          </div>
+        </div>
+
+        <div class="aboutHero__img">
+          <img src="../imagenes/LicPatas.jpeg" alt="Perro en adopción (imagen alusiva)">
+        </div>
+      </div>
+    </section>
+
+    <section class="aboutSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>¿Quiénes somos?</h2>
+          <p>PetHogar es un proyecto escolar con propósito social y enfoque comunitario.</p>
+        </div>
+
+        <div class="aboutGrid">
+          <article class="aboutCard">
+            <h3>Nuestra misión</h3>
+            <p>
+              Facilitar la adopción responsable de perros y gatos rescatados, conectando a las mascotas
+              con familias comprometidas, y promoviendo el bienestar animal mediante información clara y accesible.
+            </p>
+          </article>
+
+          <article class="aboutCard aboutCard--secondary">
+            <h3>Nuestra visión</h3>
+            <p>
+              Ser una plataforma de referencia en la comunidad para impulsar el respeto y la protección animal,
+              reduciendo el abandono y fortaleciendo la colaboración con refugios y voluntarios.
+            </p>
+          </article>
+
+          <article class="aboutCard aboutCard--accent">
+            <h3>Nuestros valores</h3>
+            <ul class="aboutList">
+              <li><strong>Responsabilidad:</strong> adoptar es un compromiso.</li>
+              <li><strong>Empatía:</strong> cada mascota tiene una historia.</li>
+              <li><strong>Transparencia:</strong> información clara para decidir mejor.</li>
+              <li><strong>Colaboración:</strong> comunidad + refugios = impacto real.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="aboutSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Objetivos</h2>
+          
+        </div>
+
+        <div class="goals">
+          <article class="goalCard">
+            <h3>Objetivo general</h3>
+            <p>
+              Desarrollar una plataforma web informativa que promueva la adopción responsable de perros y gatos rescatados,
+              facilitando la visualización de mascotas disponibles y fomentando la participación comunitaria y el apoyo a refugios.
+            </p>
+          </article>
+
+          <article class="goalCard">
+            <h3>Objetivos específicos</h3>
+            <ol class="goalList">
+              <li>Mostrar un catálogo visual de mascotas disponibles para adopción con información básica.</li>
+              <li>Brindar una sección de orientación con recomendaciones antes, durante y después de adoptar.</li>
+              <li>Incentivar el apoyo a refugios mediante un apartado de donaciones (demostrativo).</li>
+              <li>Promover campañas de esterilización y adopción mediante información comunitaria.</li>
+              <li>Diseñar una interfaz clara, adaptable y fácil de navegar (HTML, CSS y JavaScript).</li>
+            </ol>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="aboutSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>¿Cómo puedes participar?</h2>
+          <p>Adoptar, donar, compartir… y no abandonar (eso último vale por mil).</p>
+        </div>
+
+        <div class="participate">
+          <article class="miniCard">
+            <h3>🐾 Adopta</h3>
+            <p>Revisa el catálogo y elige con responsabilidad.</p>
+            <a class="btn btn--primary" href="adopta.html">Ver mascotas</a>
+          </article>
+
+          <article class="miniCard">
+            <h3> Dona</h3>
+            <p>Apoya con insumos o donación (demo) para rescates.</p>
+            <a class="btn btn--secondary" href="donaciones.html">Ir a donaciones</a>
+          </article>
+
+          <article class="miniCard">
+            <h3> Comparte</h3>
+            <p>Difunde campañas y adopciones en tu comunidad.</p>
+            <a class="btn btn--ghost" href="refugios.html">Ver campañas</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+      <p class="muted">Comunidad primero </p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

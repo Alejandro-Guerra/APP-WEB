@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar | Refugios</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand__logo">🐾</span>
+        <span class="brand__name">PetHogar</span>
+      </a>
+
+      <nav class="menu" aria-label="Menú principal">
+        <a class="menu__link" href="../index.html">Inicio</a>
+        <a class="menu__link" href="adopta.html">Adopta</a>
+        <a class="menu__link" href="productos.html">Productos</a>
+        <a class="menu__link" href="comunidad.html">Comunidad</a>
+        <a class="menu__link is-active" href="refugios.html">Refugios</a>
+        <a class="menu__link" href="donaciones.html">Donaciones</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+
+    <div class="mobile" id="mobileMenu">
+      <a href="../index.html">Inicio</a>
+      <a href="adopta.html">Adopta</a>
+      <a href="productos.html">Productos</a>
+      <a href="comunidad.html">Comunidad</a>
+      <a href="refugios.html">Refugios</a>
+      <a href="donaciones.html">Donaciones</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="refHero">
+      <div class="container refHero__inner">
+        <div>
+          <h1>Refugios y apoyo en Cancún</h1>
+          <p>
+            Aquí puedes ubicar organizaciones y puntos de ayuda. Por ahora mostramos Cancún y zona cercana.
+          </p>
+          <div class="refNote">
+            *Mapa incrustado con resultados de Google Maps (sin API, solo demostración front-end).
+          </div>
+        </div>
+
+        <div class="refHero__img">
+          <img src="../imagenes/RefugiosHero.jpeg" alt="Imagen alusiva a refugios">
+        </div>
+      </div>
+    </section>
+
+    <section class="refSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Mapa</h2>
+          <p>Se muestran refugios en Cancún según búsqueda en Google Maps.</p>
+        </div>
+
+        <div class="mapCard">
+          <iframe
+            title="Mapa de refugios en Cancún"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=refugios%20de%20animales%20en%20Canc%C3%BAn&output=embed">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="refSection">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Organizaciones recomendadas</h2>
+          <p>Tarjetas informativas + botón para abrir la ubicación en Maps.</p>
+        </div>
+
+        <div class="refGrid">
+          <article class="refCard">
+            <div class="refCard__top">
+              <h3>Dirección de Protección y Bienestar Animal (Cancún)</h3>
+              <span class="tag tag--primary">Municipal</span>
+            </div>
+            <p class="refMeta">
+              Dirección: Av. Nichupté, Supermanzana 99, Lote 1, Cancún, Q. Roo<br>
+              Tel: 998 892 3326
+            </p>
+            <div class="refActions">
+              <a class="btn btn--primary" target="_blank"
+                 href="https://www.google.com/maps?q=Avenida%20Nichupte%20Supermanzana%2099%20Lote%201%20Cancun%20Quintana%20Roo">
+                Ver en mapa
+              </a>
+              <a class="btn btn--ghost" href="adopta.html">Ver adopciones</a>
+            </div>
+          </article>
+
+          <article class="refCard">
+            <div class="refCard__top">
+              <h3>Tierra de Animales (zona Cancún)</h3>
+              <span class="tag tag--secondary">Santuario</span>
+            </div>
+            <p class="refMeta">
+              Carretera Libre Cancún–Mérida km 282.5, Leona Vicario, Benito Juárez, Q. Roo
+            </p>
+            <div class="refActions">
+              <a class="btn btn--secondary" target="_blank"
+                 href="https://www.google.com/maps?q=Carretera%20Libre%20Cancun%20Merida%20km%20282.5%20Leona%20Vicario%20Quintana%20Roo">
+                Ver en mapa
+              </a>
+              <a class="btn btn--ghost" href="donaciones.html">Apoyar</a>
+            </div>
+          </article>
+
+          <article class="refCard">
+            <div class="refCard__top">
+              <h3>Dejando Huellas por Cancún A.C.</h3>
+              <span class="tag tag--accent">Rescate</span>
+            </div>
+            <p class="refMeta">
+              Tel: +52 998 870 1062<br>
+              Correo: fundaciondejandohuellascancun@gmail.com
+            </p>
+            <div class="refActions">
+              <a class="btn btn--primary" target="_blank"
+                 href="https://www.google.com/maps?q=Dejando%20Huellas%20por%20Cancun%20A.C.">
+                Ver en mapa
+              </a>
+              <a class="btn btn--ghost" href="donaciones.html">Donar</a>
+            </div>
+          </article>
+
+          <article class="refCard">
+            <div class="refCard__top">
+              <h3>Paws in Action Cancun</h3>
+              <span class="tag tag--accent">Esterilización</span>
+            </div>
+            <p class="refMeta">
+              WhatsApp: +52 998 845 2306<br>
+              Correo: pawsinactioncancun@gmail.com
+            </p>
+            <div class="refActions">
+              <a class="btn btn--secondary" target="_blank"
+                 href="https://www.google.com/maps?q=Paws%20in%20Action%20Cancun">
+                Ver en mapa
+              </a>
+              <a class="btn btn--ghost" href="comunidad.html">Conocer más</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="refFooterNote">
+          Si quieres, luego hacemos un “mapa con pins personalizados” usando Leaflet + OpenStreetMap (sin pagar API).
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+      <p class="muted">Ubica, apoya y adopta 💜</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

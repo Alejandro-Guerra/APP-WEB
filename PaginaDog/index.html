@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__logo">🐾</span>
+        <span class="brand__name">PetHogar</span>
+      </a>
+
+      <nav class="menu" aria-label="Menú principal">
+        <a class="menu__link is-active" href="index.html">Inicio</a>
+        <a class="menu__link" href="pages/adopta.html">Adopta</a>
+        <a class="menu__link" href="pages/productos.html">Productos</a>
+        <a class="menu__link" href="pages/comunidad.html">Comunidad</a>
+        <a class="menu__link" href="pages/refugios.html">Refugios</a>
+        <a class="menu__link" href="pages/donaciones.html">Donaciones</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+
+    <!-- Menú móvil -->
+    <div class="mobile" id="mobileMenu">
+      <a href="index.html">Inicio</a>
+      <a href="pages/adopta.html">Adopta</a>
+      <a href="pages/productos.html">Productos</a>
+      <a href="pages/comunidad.html">Comunidad</a>
+      <a href="pages/refugios.html">Refugios</a>
+      <a href="pages/donaciones.html">Donaciones</a>
+    </div>
+  </header>
+
+  <!-- HERO + FILTROS -->
+  <main>
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <h1>Encuentra a tu nuevo integrante de la familia</h1>
+          <p>
+            PetHogar conecta mascotas rescatadas con personas responsables.
+            Adopta, ayuda y cambia una vida (incluida la tuya).
+          </p>
+
+          <div class="hero__badges">
+            <span class="pill"> Perros</span>
+            <span class="pill"> Gatos</span>
+            <span class="pill pill--accent"> Donaciones</span>
+          </div>
+        </div>
+
+        <div class="hero__card">
+          <h2 class="hero__cardTitle">Quiero adoptar un…</h2>
+
+          <form class="filters" id="filtersForm">
+            <label class="field">
+              <span>Tipo</span>
+              <select id="tipo">
+                <option value="Todos">Todos</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Tamaño</span>
+              <select id="tamano">
+                <option value="Todos">Todos</option>
+                <option value="Pequeño">Pequeño</option>
+                <option value="Mediano">Mediano</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Sexo</span>
+              <select id="sexo">
+                <option value="Todos">Todos</option>
+                <option value="Macho">Macho</option>
+                <option value="Hembra">Hembra</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Ubicación</span>
+              <select id="ubicacion">
+                <option value="Todos">Todos</option>
+                <option value="Cancún">Cancún</option>
+                <option value="Mérida">Mérida</option>
+                <option value="Playa del Carmen">Playa del Carmen</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Edad</span>
+              <select id="edad">
+                <option value="Todos">Todos</option>
+                <option value="Cachorro">Cachorro</option>
+                <option value="Joven">Joven</option>
+                <option value="Adulto">Adulto</option>
+              </select>
+            </label>
+
+            <button class="btn btn--primary" type="submit">
+              Buscar 🐾
+            </button>
+
+            <p class="hint" id="filtersResult" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTACADO (SLIDER SIMPLE) -->
+    <section class="featured">
+      <div class="container">
+        <div class="sectionHead">
+          <h2>Mascota destacada</h2>
+          <p>Un pequeño “spoiler” de quién podría adoptarte a ti.</p>
+        </div>
+
+        <div class="spotlight">
+          <button class="spotlight__nav" id="prevBtn" aria-label="Anterior">‹</button>
+
+          <div class="spotlight__media" id="spotlightMedia">
+            <!-- Imagen tipo placeholder (puedes cambiar por tus fotos) -->
+            <img src="assets/img/placeholder-pet-1.jpg" alt="Mascota destacada" id="spotlightImg">
+          </div>
+
+          <div class="spotlight__info">
+            <h3 id="spotlightName">Luna</h3>
+            <p class="meta" id="spotlightMeta">Gata joven • Cancún</p>
+            <p id="spotlightDesc">
+              Tranquila, curiosa y experta en ronroneos terapéuticos.
+            </p>
+
+            <div class="spotlight__actions">
+              <a class="btn btn--primary" href="pages/adopta.html">¡Quiero adoptar!</a>
+              <a class="btn btn--ghost" href="pages/donaciones.html">Quiero ayudar </a>
+            </div>
+          </div>
+
+          <button class="spotlight__nav" id="nextBtn" aria-label="Siguiente">›</button>
+        </div>
+
+        <div class="dots" id="dots"></div>
+      </div>
+    </section>
+
+    <!-- CARDS (BLOQUES COMO EN EL EJEMPLO) -->
+    <section class="blocks">
+      <div class="container grid3">
+        <article class="card">
+          <h3>Cambiando vidas</h3>
+          <p>
+            PetHogar promueve adopción responsable: información clara, contacto
+            y apoyo a refugios.
+          </p>
+          <a class="btn btn--secondary" href="pages/comunidad.html">Conocer más</a>
+        </article>
+
+        <article class="card card--secondary">
+          <h3>Eventos y noticias</h3>
+          <p>
+            Campañas de esterilización, adopciones masivas y jornadas de apoyo.
+          </p>
+          <a class="btn btn--ghostOnDark" href="pages/refugios.html">Ver eventos</a>
+        </article>
+
+        <article class="card card--accent">
+          <h3>Antes de adoptar</h3>
+          <p>
+            Reflexiona: tiempo, espacio, gastos y compromiso. Adoptar es amor…
+            con responsabilidad.
+          </p>
+          <a class="btn btn--dark" href="pages/comunidad.html">Leer tips</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- BANNER FINAL -->
+    <section class="cta">
+      <div class="container cta__inner">
+        <div>
+          <h2>Tú puedes ayudar a cambiar vidas</h2>
+          <p>
+            Donar apoya alimento, medicinas y rescates. Cada aporte cuenta.
+          </p>
+        </div>
+        <a class="btn btn--primary" href="pages/donaciones.html">Quiero ayudar </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+      <p class="muted">Hecho con ganas de aprobar.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
