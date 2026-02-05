@@ -17,7 +17,7 @@ const filtersResult = document.getElementById("filtersResult");
 
 if (filtersForm && filtersResult) {
     filtersForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
 
         const tipo = document.getElementById("tipo").value;
         const tamano = document.getElementById("tamano").value;
