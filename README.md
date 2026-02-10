@@ -14,4 +14,4 @@ que necesitan ayuda.
 
 # ¿Que lenguaje de desarrollo usa?
 
-El lenguaje en el que se amneja es HTML, CSS, JAVA SCRIPT.
+El lenguaje en el que se maneja es HTML, CSS, JAVA SCRIPT.
