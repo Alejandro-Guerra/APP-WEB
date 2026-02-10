@@ -17,7 +17,7 @@ const filtersResult = document.getElementById("filtersResult");
 
 if (filtersForm && filtersResult) {
     filtersForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
 
         const tipo = document.getElementById("tipo").value;
         const tamano = document.getElementById("tamano").value;
@@ -34,9 +34,9 @@ if (filtersForm && filtersResult) {
 const pets = [
     {
         name: "Luna",
-        meta: "Gata joven • Cancún",
+        meta: "Perra joven • Cancún",
         desc: "Tranquila, curiosa y experta en ronroneos terapéuticos.",
-        img: "assets/img/placeholder-pet-1.jpg"
+        img: "imagenes/bonie.jpeg"
     },
     {
         name: "Patotas",
@@ -48,13 +48,13 @@ const pets = [
         name: "Nala",
         meta: "Perra joven • Playa del Carmen",
         desc: "Cariñosa, sociable y lista para una familia responsable.",
-        img: "assets/img/placeholder-pet-3.jpg"
+        img: "imagenes/canela.jpeg"
     },
     {
         name: "Nalo",
-        meta: "Perra joven • Playa del Carmen",
-        desc: "Cariñosa, sociable y lista para una familia responsable.",
-        img: "assets/img/placeholder-pet-3.jpg"
+        meta: "Pato joven • Playa del Carmen",
+        desc: "Cariñoso, sociable y lista para una familia responsable.",
+        img: "imagenes/pato.jpeg"
     }
 ];
 const adoptGrid = document.getElementById("adoptGrid");
@@ -63,11 +63,11 @@ if (adoptGrid) {
   const adoptPets = [
     {
       name: "Luna",
-      type: "Gato",
+      type: "Perro",
       status: "Disponible",
       meta: "Joven • Cancún",
       desc: "Tranquila y curiosa.",
-      img: "../imagenes/Luna.jpeg"
+      img: "../imagenes/bonie.jpeg"
     },
     {
       name: "Patotas",
@@ -83,7 +83,7 @@ if (adoptGrid) {
       status: "Adoptado",
       meta: "Joven • Playa del Carmen",
       desc: "Ya encontró hogar 💜",
-      img: "../imagenes/Nala.jpeg"
+      img: "../imagenes/canela.jpeg"
     },
     {
       name: "Michi",
@@ -94,20 +94,20 @@ if (adoptGrid) {
       img: "../imagenes/Michi.jpeg"
     },
     {
-      name: "Toby",
+      name: "Lalo",
       type: "Perro",
       status: "Adoptado",
       meta: "Adulto • Cancún",
       desc: "Misión cumplida 🏠",
-      img: "../imagenes/Toby.jpeg"
+      img: "../imagenes/lalo.jpeg"
     },
     {
-      name: "Canela",
-      type: "Gato",
+      name: "andrix",
+      type: "Perro",
       status: "Disponible",
       meta: "Joven • Mérida",
       desc: "Dulce y sociable.",
-      img: "../imagenes/Canela.jpeg"
+      img: "../imagenes/andrix.jpeg"
     }
   ];
 

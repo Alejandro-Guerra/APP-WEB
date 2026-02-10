@@ -386,7 +386,7 @@ select:focus{
   .filters{ grid-template-columns: 1fr; }
   .cta__inner{ flex-direction: column; align-items: flex-start; }
 }
-/* ===== ADOPTA PAGE ===== */
+
 .pageHero{
   padding: 26px 0 12px;
 }
@@ -521,7 +521,7 @@ select:focus{
   flex-wrap: wrap;
 }
 
-/* Estado adoptado: se ve “bloqueado” */
+
 .petCard.is-adopted{
   opacity: .72;
 }
@@ -824,7 +824,7 @@ select:focus{
   font-weight: 650;
 }
 
-/* Responsive */
+
 @media (max-width: 920px){
   .aboutHero__inner{ grid-template-columns: 1fr; }
   .aboutGrid{ grid-template-columns: 1fr; }
@@ -832,7 +832,7 @@ select:focus{
   .participate{ grid-template-columns: 1fr; }
   .aboutHero__img img{ height: 260px; }
 }
-/* ===== REFUGIOS ===== */
+
 .refHero{ padding: 26px 0 12px; }
 .refHero__inner{
   display:grid;
@@ -946,7 +946,7 @@ select:focus{
   font-size: 13px;
 }
 
-/* Responsive */
+
 @media (max-width: 920px){
   .refHero__inner{ grid-template-columns: 1fr; }
   .refHero__img img{ height: 260px; }
