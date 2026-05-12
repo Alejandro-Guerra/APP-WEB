@@ -4,100 +4,173 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PetHogar | Adopta</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* HERO */
+    .adoptHero { padding: 0; position: relative; overflow: hidden; }
+    .adoptHero__backdrop {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 65% at 5% 95%, rgba(255,107,107,.12) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 55% at 95% 5%, rgba(109,40,217,.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .adoptHero__inner {
+      padding: 44px 0 28px; position: relative; z-index: 1;
+    }
+    .adoptHero__top {
+      display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 20px; margin-bottom: 24px;
+    }
+    .adoptHero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,107,107,.10); border: 1px solid rgba(255,107,107,.22);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 12px; font-weight: 800; color: var(--primary);
+      text-transform: uppercase; letter-spacing: .6px; margin-bottom: 12px;
+    }
+    .adoptHero__inner h1 {
+      font-family: Poppins, sans-serif; font-size: clamp(26px, 3vw, 42px);
+      font-weight: 800; line-height: 1.1; margin: 0 0 8px; color: var(--text);
+    }
+    .adoptHero__inner h1 span { color: var(--secondary); }
+    .adoptHero__inner > .adoptHero__inner > p { color: var(--muted); margin: 0; font-size: 15px; }
+
+    /* FILTERS CARD */
+    .filtersCard {
+      background: #fff; border-radius: 20px; padding: 18px 20px;
+      box-shadow: 0 10px 32px rgba(0,0,0,.08); border: 1px solid rgba(17,24,39,.06);
+      display: grid; grid-template-columns: 1fr 1fr 2fr auto auto; gap: 12px; align-items: end;
+    }
+    .filtersCard .field span {
+      display: block; font-size: 11px; font-weight: 800; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
+    }
+    .filtersCard select, .filtersCard input {
+      width: 100%; padding: 11px 12px; border-radius: 12px;
+      border: 1.5px solid rgba(109,40,217,.18); outline: none;
+      background: rgba(109,40,217,.03); font-family: Inter, sans-serif; font-weight: 600; font-size: 14px;
+    }
+    .filtersCard select:focus, .filtersCard input:focus { border-color: rgba(109,40,217,.55); }
+    #countResult { font-size: 13px; font-weight: 700; color: var(--muted); margin: 0; }
+
+    /* GRID */
+    .adoptGridSection { padding: 20px 0 48px; }
+    .adoptGrid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+
+    /* PET CARDS — override for this page */
+    .petCard { transition: transform .18s ease, box-shadow .18s ease; }
+    .petCard:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.12); }
+    .petCard__imgWrap img { transition: transform .3s ease; }
+    .petCard:hover .petCard__imgWrap img { transform: scale(1.05); }
+
+    .petCard__actions a { flex: 1; text-align: center; }
+
+    /* NO RESULTS */
+    .noResults {
+      grid-column: 1 / -1; text-align: center; padding: 48px 20px;
+      color: var(--muted); font-size: 15px; font-weight: 700;
+    }
+    .noResults span { font-size: 48px; display: block; margin-bottom: 12px; }
+
+    @media (max-width: 1000px) { .adoptGrid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px)  { .filtersCard { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px)  {
+      .adoptGrid { grid-template-columns: 1fr; }
+      .filtersCard { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="container nav__inner">
-      <a class="brand" href="../index.html">
-        <span class="brand__logo">🐾</span>
-        <span class="brand__name">PetHogar</span>
-      </a>
 
-      <nav class="menu" aria-label="Menú principal">
-        <a class="menu__link" href="../index.html">Inicio</a>
-        <a class="menu__link is-active" href="adopta.html">Adopta</a>
-        <a class="menu__link" href="productos.html">Productos</a>
-        <a class="menu__link" href="comunidad.html">Comunidad</a>
-        <a class="menu__link" href="refugios.html">Refugios</a>
-        <a class="menu__link" href="donaciones.html">Donaciones</a>
-      </nav>
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html"><span class="brand__logo">🐾</span><span class="brand__name">PetHogar</span></a>
+    <nav class="menu" aria-label="Menú principal">
+      <a class="menu__link" href="../index.html">Inicio</a>
+      <a class="menu__link is-active" href="adopta.html">Adopta</a>
+      <a class="menu__link" href="productos.html">Productos</a>
+      <a class="menu__link" href="comunidad.html">Comunidad</a>
+      <a class="menu__link" href="refugios.html">Refugios</a>
+      <a class="menu__link" href="donaciones.html">Donaciones</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+  <div class="mobile" id="mobileMenu">
+    <a href="../index.html">Inicio</a><a href="adopta.html">Adopta</a>
+    <a href="productos.html">Productos</a><a href="comunidad.html">Comunidad</a>
+    <a href="refugios.html">Refugios</a><a href="donaciones.html">Donaciones</a>
+  </div>
+</header>
 
-      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">
-        ☰
-      </button>
-    </div>
-
-    <div class="mobile" id="mobileMenu">
-      <a href="../index.html">Inicio</a>
-      <a href="adopta.html">Adopta</a>
-      <a href="productos.html">Productos</a>
-      <a href="comunidad.html">Comunidad</a>
-      <a href="refugios.html">Refugios</a>
-      <a href="donaciones.html">Donaciones</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="pageHero">
-      <div class="container pageHero__inner">
+<main>
+  <section class="adoptHero">
+    <div class="adoptHero__backdrop"></div>
+    <div class="container adoptHero__inner">
+      <div class="adoptHero__top">
         <div>
-          <h1>Adopta</h1>
-          <p>Explora perritos y gatitos rescatados. Algunos ya encontraron hogar (y se presume).</p>
+          <div class="adoptHero__eyebrow">🐾 Adopción responsable</div>
+          <h1>Encuentra a tu<br><span>próximo mejor amigo</span></h1>
+          <p style="color:var(--muted);font-size:15px;margin:0;">Perritos y gatitos rescatados esperando un hogar. Algunos ya encontraron familia — ¡pero aún hay lugar para ti!</p>
         </div>
-
-        <form class="adoptFilters" id="adoptFilters">
-          <label class="field">
-            <span>Tipo</span>
-            <select id="fTipo">
-              <option value="Todos">Todos</option>
-              <option value="Perro">Perro</option>
-              <option value="Gato">Gato</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>Estado</span>
-            <select id="fEstado">
-              <option value="Todos">Todos</option>
-              <option value="Disponible">Disponible</option>
-              <option value="Adoptado">Adoptado</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>Buscar (nombre)</span>
-            <input id="fBuscar" type="text" placeholder="Ej: Patotas" />
-          </label>
-
-          <button class="btn btn--primary" type="submit">Filtrar</button>
-          <button class="btn btn--ghost" type="button" id="resetBtn">Limpiar</button>
-
-          <p class="hint" id="countResult" aria-live="polite"></p>
-        </form>
+        <p id="countResult" style="white-space:nowrap;"></p>
       </div>
-    </section>
 
-    <section class="adoptGridSection">
-      <div class="container">
-        <div class="adoptGrid" id="adoptGrid">
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
-      <p class="muted">Adopta con responsabilidad 💜</p>
+      <form class="filtersCard" id="adoptFilters">
+        <label class="field">
+          <span>Tipo</span>
+          <select id="fTipo">
+            <option value="Todos">Todos</option>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Estado</span>
+          <select id="fEstado">
+            <option value="Todos">Todos</option>
+            <option value="Disponible">Disponible</option>
+            <option value="Adoptado">Adoptado</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Buscar por nombre</span>
+          <input id="fBuscar" type="text" placeholder="Ej: Luna, Michi…" />
+        </label>
+        <button class="btn btn--primary" type="submit">Filtrar 🔍</button>
+        <button class="btn btn--ghost" type="button" id="resetBtn">Limpiar</button>
+      </form>
     </div>
-  </footer>
+  </section>
 
-  <script src="../js/main.js"></script>
+  <section class="adoptGridSection">
+    <div class="container">
+      <div class="adoptGrid" id="adoptGrid"></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <div>
+        <h2>¿Quieres apoyar sin adoptar?</h2>
+        <p>Dona alimento, medicinas o recursos para que más mascotas encuentren hogar.</p>
+      </div>
+      <a class="btn btn--primary" href="donaciones.html">Quiero donar 💜</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+    <p class="muted">Adopta con responsabilidad 💜</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
 </body>
 </html>
