@@ -4,110 +4,226 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PetHogar | Donaciones</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* HERO */
+    .donHero { padding: 0; position: relative; overflow: hidden; }
+    .donHero__backdrop {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 65% at 0% 100%, rgba(34,197,94,.10) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 55% at 100% 0%, rgba(109,40,217,.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .donHero__inner {
+      display: grid; grid-template-columns: 1.1fr .9fr;
+      gap: 32px; align-items: start; padding: 48px 0 40px; position: relative; z-index: 1;
+    }
+    .donHero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(34,197,94,.10); border: 1px solid rgba(34,197,94,.25);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 12px; font-weight: 800; color: #166534;
+      text-transform: uppercase; letter-spacing: .6px; margin-bottom: 16px;
+    }
+    .donHero__text h1 {
+      font-family: Poppins, sans-serif; font-size: clamp(26px, 3vw, 44px);
+      font-weight: 800; line-height: 1.1; margin: 0 0 14px; color: var(--text);
+    }
+    .donHero__text h1 span { color: var(--secondary); }
+    .donHero__text p { color: var(--muted); font-size: 15.5px; line-height: 1.65; margin: 0 0 22px; max-width: 52ch; }
+
+    .donStats { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 0 0 20px; }
+    .stat {
+      background: #fff; border-radius: 18px; padding: 14px 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.07); border: 1px solid rgba(17,24,39,.06);
+      display: flex; gap: 14px; align-items: center;
+    }
+    .stat__icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+    }
+    .stat__icon--food    { background: rgba(255,107,107,.12); }
+    .stat__icon--health  { background: rgba(109,40,217,.12); }
+    .stat__icon--rescue  { background: rgba(34,197,94,.12); }
+    .stat__title { margin: 0; font-weight: 800; color: var(--text); font-size: 14px; }
+    .stat__desc  { margin: 2px 0 0; color: var(--muted); font-weight: 600; font-size: 12.5px; }
+
+    .donNote {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: rgba(109,40,217,.07); border: 1px solid rgba(109,40,217,.16);
+      border-radius: 14px; padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--secondary);
+    }
+
+    /* FORM CARD */
+    .donCard {
+      background: #fff; border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.10); border: 1px solid rgba(17,24,39,.06);
+      overflow: hidden;
+    }
+    .donCard__header {
+      background: linear-gradient(135deg, var(--secondary), #8B5CF6);
+      padding: 22px 24px;
+    }
+    .donCard__header h2 { font-family: Poppins, sans-serif; color: #fff; margin: 0 0 4px; font-size: 20px; }
+    .donCard__header p  { color: rgba(255,255,255,.75); margin: 0; font-size: 13px; font-weight: 600; }
+    .donCard__body { padding: 22px 24px; }
+
+    /* AMOUNT PRESETS */
+    .amountRow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+    .amountBtn {
+      padding: 10px 8px; border-radius: 12px; border: 1.5px solid rgba(109,40,217,.20);
+      background: transparent; font-family: Poppins, sans-serif; font-size: 14px; font-weight: 700;
+      color: var(--secondary); cursor: pointer; transition: all .15s; text-align: center;
+    }
+    .amountBtn:hover, .amountBtn.active {
+      background: var(--secondary); color: #fff; border-color: var(--secondary);
+    }
+
+    .donForm { display: grid; gap: 14px; }
+    .donForm .field span { display: block; font-size: 12px; font-weight: 800; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .4px; }
+    .donForm input, .donForm select, .donForm textarea {
+      width: 100%; padding: 12px 14px; border-radius: 14px;
+      border: 1.5px solid rgba(109,40,217,.18); outline: none;
+      background: rgba(109,40,217,.03); font-family: Inter, sans-serif; font-weight: 600; font-size: 14px;
+      transition: border-color .2s, background .2s;
+    }
+    .donForm input:focus, .donForm select:focus, .donForm textarea:focus {
+      border-color: rgba(109,40,217,.6); background: rgba(109,40,217,.05);
+    }
+    .donForm textarea { resize: vertical; }
+    .donRow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .check { display: flex; gap: 10px; align-items: center; color: var(--muted); font-weight: 700; font-size: 13px; }
+    .check input { width: 18px; height: 18px; accent-color: var(--secondary); }
+    .donResult { min-height: 20px; font-size: 13px; font-weight: 700; }
+    .donResult.ok    { color: #166534; background: rgba(34,197,94,.10); border-radius: 10px; padding: 8px 12px; }
+    .donResult.error { color: #991b1b; background: rgba(255,107,107,.10); border-radius: 10px; padding: 8px 12px; }
+
+    /* FAQ */
+    .donFAQ { padding: 10px 0 40px; }
+    .donFAQ__head { margin-bottom: 20px; }
+    .donFAQ__head h2 { font-family: Poppins, sans-serif; color: var(--text); margin: 0 0 6px; }
+    .donFAQ__head p  { color: var(--muted); margin: 0; font-size: 14px; }
+    .faqGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .faqItem {
+      background: #fff; border-radius: 20px; padding: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.07); border: 1px solid rgba(17,24,39,.06);
+      transition: transform .15s;
+    }
+    .faqItem:hover { transform: translateY(-3px); }
+    .faqItem__icon { font-size: 28px; display: block; margin-bottom: 10px; }
+    .faqItem h3 { font-family: Poppins, sans-serif; margin: 0 0 8px; color: var(--secondary); font-size: 15px; }
+    .faqItem p  { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .donHero__inner { grid-template-columns: 1fr; }
+      .donRow { grid-template-columns: 1fr; }
+      .faqGrid { grid-template-columns: 1fr; }
+      .amountRow { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="container nav__inner">
-      <a class="brand" href="../index.html">
-        <span class="brand__logo">🐾</span>
-        <span class="brand__name">PetHogar</span>
-      </a>
 
-      <nav class="menu" aria-label="Menú principal">
-        <a class="menu__link" href="../index.html">Inicio</a>
-        <a class="menu__link" href="adopta.html">Adopta</a>
-        <a class="menu__link" href="productos.html">Productos</a>
-        <a class="menu__link" href="comunidad.html">Comunidad</a>
-        <a class="menu__link" href="refugios.html">Refugios</a>
-        <a class="menu__link is-active" href="donaciones.html">Donaciones</a>
-      </nav>
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html"><span class="brand__logo">🐾</span><span class="brand__name">PetHogar</span></a>
+    <nav class="menu" aria-label="Menú principal">
+      <a class="menu__link" href="../index.html">Inicio</a>
+      <a class="menu__link" href="adopta.html">Adopta</a>
+      <a class="menu__link" href="productos.html">Productos</a>
+      <a class="menu__link" href="comunidad.html">Comunidad</a>
+      <a class="menu__link" href="refugios.html">Refugios</a>
+      <a class="menu__link is-active" href="donaciones.html">Donaciones</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+  <div class="mobile" id="mobileMenu">
+    <a href="../index.html">Inicio</a><a href="adopta.html">Adopta</a>
+    <a href="productos.html">Productos</a><a href="comunidad.html">Comunidad</a>
+    <a href="refugios.html">Refugios</a><a href="donaciones.html">Donaciones</a>
+  </div>
+</header>
 
-      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
-    </div>
+<main>
+  <section class="donHero">
+    <div class="donHero__backdrop"></div>
+    <div class="container donHero__inner">
 
-    <div class="mobile" id="mobileMenu">
-      <a href="../index.html">Inicio</a>
-      <a href="adopta.html">Adopta</a>
-      <a href="productos.html">Productos</a>
-      <a href="comunidad.html">Comunidad</a>
-      <a href="refugios.html">Refugios</a>
-      <a href="donaciones.html">Donaciones</a>
-    </div>
-  </header>
+      <div class="donHero__text">
+        <div class="donHero__eyebrow">💚 Apoya la causa</div>
+        <h1>Tu donación cambia<br><span>vidas reales</span></h1>
+        <p>Aquí no "compras una buena acción"; financias una segunda oportunidad. Cada peso va directo a alimento, medicinas y rescates.</p>
 
-  <main>
-    <section class="donHero">
-      <div class="container donHero__inner">
-        <div class="donHero__text">
-          <h1>Donaciones</h1>
-          <p>
-            Tu apoyo ayuda a alimento, medicinas, esterilizaciones y rescates.
-            Aquí no “compras una buena acción”; financias una segunda oportunidad 🐾
-          </p>
-
-          <div class="donStats">
-            <div class="stat">
-              <div class="stat__num"></div>
-              <div>
-                <p class="stat__title">Alimento</p>
-                <p class="stat__desc">Croquetas y suplementos</p>
-              </div>
-            </div>
-
-            <div class="stat">
-              <div class="stat__num"></div>
-              <div>
-                <p class="stat__title">Salud</p>
-                <p class="stat__desc">Vacunas y medicamentos</p>
-              </div>
-            </div>
-
-            <div class="stat">
-              <div class="stat__num"></div>
-              <div>
-                <p class="stat__title">Rescate</p>
-                <p class="stat__desc">Traslados y atención</p>
-              </div>
+        <div class="donStats">
+          <div class="stat">
+            <div class="stat__icon stat__icon--food">🍖</div>
+            <div>
+              <p class="stat__title">Alimento</p>
+              <p class="stat__desc">Croquetas y suplementos para refugios</p>
             </div>
           </div>
-
-          <div class="donNote">
-            <strong>Nota escolar:</strong> este formulario es demostrativo (front-end). No procesa pagos reales.
+          <div class="stat">
+            <div class="stat__icon stat__icon--health">💉</div>
+            <div>
+              <p class="stat__title">Salud</p>
+              <p class="stat__desc">Vacunas, medicamentos y esterilizaciones</p>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat__icon stat__icon--rescue">🚑</div>
+            <div>
+              <p class="stat__title">Rescate</p>
+              <p class="stat__desc">Traslados, atención de emergencia y acogida</p>
+            </div>
           </div>
         </div>
 
-        <div class="donCard">
-          <h2 class="donCard__title">Formulario de donación</h2>
+        <div class="donNote">
+          <span>⚠️</span>
+          <span><strong>Nota:</strong> este formulario es demostrativo (proyecto escolar). No procesa pagos reales.</span>
+        </div>
+      </div>
+
+      <div class="donCard">
+        <div class="donCard__header">
+          <h2>Formulario de donación</h2>
+          <p>Simulación front-end — sin pasarela de pago</p>
+        </div>
+        <div class="donCard__body">
+
+          <label class="field" style="margin-bottom:6px;">
+            <span style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:8px;">Monto rápido</span>
+          </label>
+          <div class="amountRow" id="amountRow">
+            <button class="amountBtn" data-val="50">$50</button>
+            <button class="amountBtn active" data-val="100">$100</button>
+            <button class="amountBtn" data-val="200">$200</button>
+            <button class="amountBtn" data-val="500">$500</button>
+          </div>
 
           <form id="donForm" class="donForm">
             <label class="field">
               <span>Nombre completo *</span>
               <input id="donNombre" type="text" placeholder="Ej: Alejandro Guerra" required />
             </label>
-
             <label class="field">
               <span>Correo *</span>
               <input id="donCorreo" type="email" placeholder="ejemplo@correo.com" required />
             </label>
-
             <div class="donRow">
               <label class="field">
                 <span>Teléfono (opcional)</span>
-                <input id="donTel" type="tel" placeholder="999 123 4567" />
+                <input id="donTel" type="tel" placeholder="998 123 4567" />
               </label>
-
               <label class="field">
                 <span>Monto (MXN) *</span>
-                <input id="donMonto" type="number" min="10" step="10" placeholder="Ej: 100" required />
+                <input id="donMonto" type="number" min="10" step="10" placeholder="100" required />
               </label>
             </div>
-
             <label class="field">
               <span>Tipo de donación *</span>
               <select id="donTipo" required>
@@ -117,9 +233,8 @@
                 <option value="En especie">En especie (alimento/medicina)</option>
               </select>
             </label>
-
             <label class="field">
-              <span>Método (solo demostración) *</span>
+              <span>Método (demo) *</span>
               <select id="donMetodo" required>
                 <option value="">Selecciona un método</option>
                 <option value="Transferencia">Transferencia</option>
@@ -127,59 +242,95 @@
                 <option value="Tarjeta (demo)">Tarjeta (demo)</option>
               </select>
             </label>
-
             <label class="field">
               <span>Mensaje (opcional)</span>
-              <textarea id="donMsg" rows="3" placeholder="Ej: Para ayudar con vacunas "></textarea>
+              <textarea id="donMsg" rows="2" placeholder="Ej: Para ayudar con vacunas 💜"></textarea>
             </label>
-
             <label class="check">
               <input id="donCheck" type="checkbox" />
               <span>Deseo recibir noticias de PetHogar (demo)</span>
             </label>
-
-            <button class="btn btn--primary" type="submit">Enviar donación</button>
-
-            <p class="hint" id="donResult" aria-live="polite"></p>
+            <p class="donResult" id="donResult" aria-live="polite"></p>
+            <button class="btn btn--primary" type="submit" style="width:100%;padding:15px;font-size:16px;border-radius:14px;">
+              Enviar donación 💜
+            </button>
           </form>
         </div>
       </div>
-    </section>
 
-    <section class="donFAQ">
-      <div class="container">
-        <div class="sectionHead">
-          <h2>Preguntas rápidas</h2>
-          <p>Para que el profe vea “contenido” y no solo formulario </p>
-        </div>
-
-        <div class="faqGrid">
-          <article class="faqItem">
-            <h3>¿En qué se usa el dinero?</h3>
-            <p>Alimento, atención veterinaria, esterilización y apoyo en rescates.</p>
-          </article>
-
-          <article class="faqItem">
-            <h3>¿Puedo donar en especie?</h3>
-            <p>Sí. Puedes llevar alimento, cobijas o medicamentos a un punto de acopio.</p>
-          </article>
-
-          <article class="faqItem">
-            <h3>¿Es un pago real?</h3>
-            <p>No. Este sitio es un proyecto escolar. Simula el proceso (front-end).</p>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
-      <p class="muted">Gracias por apoyar </p>
     </div>
-  </footer>
+  </section>
 
-  <script src="../js/main.js"></script>
+  <section class="donFAQ">
+    <div class="container">
+      <div class="donFAQ__head">
+        <h2>Preguntas frecuentes</h2>
+        <p>Todo lo que debes saber antes de donar.</p>
+      </div>
+      <div class="faqGrid">
+        <article class="faqItem">
+          <span class="faqItem__icon">🐾</span>
+          <h3>¿En qué se usa el dinero?</h3>
+          <p>Alimento, atención veterinaria, esterilización y apoyo en rescates de emergencia.</p>
+        </article>
+        <article class="faqItem">
+          <span class="faqItem__icon">📦</span>
+          <h3>¿Puedo donar en especie?</h3>
+          <p>Sí. Puedes llevar alimento, cobijas o medicamentos a cualquier punto de acopio registrado.</p>
+        </article>
+        <article class="faqItem">
+          <span class="faqItem__icon">💳</span>
+          <h3>¿Es un pago real?</h3>
+          <p>No. Este sitio es un proyecto escolar. Simula el proceso de donación (front-end únicamente).</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <div>
+        <h2>¿Prefieres adoptar?</h2>
+        <p>También puedes ayudar dando un hogar permanente a una mascota rescatada.</p>
+      </div>
+      <a class="btn btn--primary" href="adopta.html">Ver mascotas 🐾</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+    <p class="muted">Gracias por apoyar 💜</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+  // Amount presets
+  const amountBtns = document.querySelectorAll('.amountBtn');
+  const montoInput = document.getElementById('donMonto');
+  montoInput.value = 100;
+  amountBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      amountBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      montoInput.value = btn.dataset.val;
+    });
+  });
+  montoInput.addEventListener('input', () => amountBtns.forEach(b => b.classList.remove('active')));
+
+  // Form result styling
+  const donResult = document.getElementById('donResult');
+  document.getElementById('donForm').addEventListener('submit', () => {
+    setTimeout(() => {
+      if (donResult.textContent.startsWith('¡Gracias')) {
+        donResult.className = 'donResult ok';
+      } else if (donResult.textContent) {
+        donResult.className = 'donResult error';
+      }
+    }, 50);
+  });
+</script>
 </body>
 </html>

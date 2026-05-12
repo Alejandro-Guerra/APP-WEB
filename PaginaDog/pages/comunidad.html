@@ -4,172 +4,271 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PetHogar | Comunidad</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* HERO */
+    .commHero { padding: 0; position: relative; overflow: hidden; }
+    .commHero__backdrop {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 10% 90%, rgba(109,40,217,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 55% at 90% 10%, rgba(34,197,94,.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .commHero__inner {
+      display: grid; grid-template-columns: 1.1fr .9fr;
+      gap: 32px; align-items: center; padding: 48px 0 36px; position: relative; z-index: 1;
+    }
+    .commHero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(109,40,217,.10); border: 1px solid rgba(109,40,217,.20);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 12px; font-weight: 800; color: var(--secondary);
+      text-transform: uppercase; letter-spacing: .6px; margin-bottom: 16px;
+    }
+    .commHero__text h1 {
+      font-family: Poppins, sans-serif; font-size: clamp(26px, 3vw, 44px);
+      font-weight: 800; line-height: 1.1; margin: 0 0 14px; color: var(--text);
+    }
+    .commHero__text h1 span { color: var(--secondary); }
+    .commHero__text p { color: var(--muted); font-size: 15.5px; line-height: 1.65; margin: 0 0 22px; max-width: 52ch; }
+    .commHero__pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .commHero__visual {
+      background: linear-gradient(135deg, rgba(109,40,217,.08), rgba(34,197,94,.07));
+      border-radius: 24px; padding: 28px;
+      border: 1px solid rgba(17,24,39,.06); box-shadow: 0 20px 60px rgba(0,0,0,.08);
+    }
+    .team-avatars { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .avatar-item { text-align: center; }
+    .avatar-circle {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; margin: 0 auto 8px;
+      box-shadow: 0 8px 20px rgba(109,40,217,.25);
+    }
+    .avatar-name { font-size: 12px; font-weight: 700; color: var(--muted); }
+
+    /* VALUES */
+    .valuesSection { padding: 16px 0 28px; }
+    .valuesSection__head { margin-bottom: 20px; }
+    .valuesSection__head h2 { font-family: Poppins, sans-serif; color: var(--text); margin: 0 0 6px; }
+    .valuesSection__head p  { color: var(--muted); margin: 0; font-size: 14.5px; }
+    .valuesGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .valueCard {
+      border-radius: 22px; padding: 22px 20px;
+      border: 1px solid rgba(17,24,39,.06); transition: transform .18s;
+    }
+    .valueCard:hover { transform: translateY(-4px); }
+    .valueCard--mission  { background: #fff; box-shadow: 0 8px 28px rgba(0,0,0,.08); }
+    .valueCard--vision   { background: var(--secondary); color: #fff; box-shadow: 0 8px 28px rgba(109,40,217,.22); }
+    .valueCard--values   { background: rgba(34,197,94,.12); border: 2px solid rgba(34,197,94,.20); }
+    .valueCard__icon { font-size: 32px; display: block; margin-bottom: 12px; }
+    .valueCard h3 { font-family: Poppins, sans-serif; margin: 0 0 10px; font-size: 17px; }
+    .valueCard--mission h3 { color: var(--secondary); }
+    .valueCard--vision  h3 { color: #fff; }
+    .valueCard--values  h3 { color: #14532d; }
+    .valueCard p  { margin: 0; font-size: 14px; line-height: 1.6; font-weight: 600; }
+    .valueCard--mission p { color: var(--muted); }
+    .valueCard--vision  p { color: rgba(255,255,255,.80); }
+    .valueCard--values  p { color: #166534; }
+    .valueList { margin: 0; padding-left: 18px; }
+    .valueList li { margin: 7px 0; font-size: 14px; font-weight: 700; color: #166534; }
+
+    /* GOALS */
+    .goalsSection { padding: 8px 0 28px; }
+    .goalsSection__head { margin-bottom: 20px; }
+    .goalsSection__head h2 { font-family: Poppins, sans-serif; color: var(--text); margin: 0 0 6px; }
+    .goalsSection__head p  { color: var(--muted); margin: 0; font-size: 14.5px; }
+    .goalsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .goalBox {
+      background: #fff; border-radius: 22px; padding: 22px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.08); border: 1px solid rgba(17,24,39,.06);
+    }
+    .goalBox h3 { font-family: Poppins, sans-serif; color: var(--secondary); margin: 0 0 12px; }
+    .goalBox p  { color: var(--muted); font-size: 14px; line-height: 1.65; font-weight: 600; margin: 0; }
+    .goalBox ol { margin: 0; padding-left: 20px; color: var(--muted); font-weight: 700; }
+    .goalBox ol li { margin: 9px 0; font-size: 13.5px; line-height: 1.5; }
+
+    /* PARTICIPATE */
+    .participateSection { padding: 8px 0 40px; }
+    .participateSection__head { margin-bottom: 20px; }
+    .participateSection__head h2 { font-family: Poppins, sans-serif; color: var(--text); margin: 0 0 6px; }
+    .participateSection__head p  { color: var(--muted); margin: 0; font-size: 14.5px; }
+    .participateGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .partCard {
+      background: #fff; border-radius: 22px; padding: 24px 20px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.08); border: 1px solid rgba(17,24,39,.06);
+      text-align: center; transition: transform .18s;
+    }
+    .partCard:hover { transform: translateY(-5px); }
+    .partCard__icon { font-size: 44px; display: block; margin-bottom: 14px; }
+    .partCard h3 { font-family: Poppins, sans-serif; margin: 0 0 8px; color: var(--text); font-size: 17px; }
+    .partCard p  { margin: 0 0 16px; color: var(--muted); font-size: 13.5px; font-weight: 600; line-height: 1.55; }
+
+    @media (max-width: 900px) {
+      .commHero__inner { grid-template-columns: 1fr; }
+      .commHero__visual { display: none; }
+      .valuesGrid { grid-template-columns: 1fr; }
+      .goalsGrid  { grid-template-columns: 1fr; }
+      .participateGrid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header class="nav">
-    <div class="container nav__inner">
-      <a class="brand" href="../index.html">
-        <span class="brand__logo">🐾</span>
-        <span class="brand__name">PetHogar</span>
-      </a>
 
-      <nav class="menu" aria-label="Menú principal">
-        <a class="menu__link" href="../index.html">Inicio</a>
-        <a class="menu__link" href="adopta.html">Adopta</a>
-        <a class="menu__link" href="productos.html">Productos</a>
-        <a class="menu__link is-active" href="comunidad.html">Comunidad</a>
-        <a class="menu__link" href="refugios.html">Refugios</a>
-        <a class="menu__link" href="donaciones.html">Donaciones</a>
-      </nav>
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html"><span class="brand__logo">🐾</span><span class="brand__name">PetHogar</span></a>
+    <nav class="menu" aria-label="Menú principal">
+      <a class="menu__link" href="../index.html">Inicio</a>
+      <a class="menu__link" href="adopta.html">Adopta</a>
+      <a class="menu__link" href="productos.html">Productos</a>
+      <a class="menu__link is-active" href="comunidad.html">Comunidad</a>
+      <a class="menu__link" href="refugios.html">Refugios</a>
+      <a class="menu__link" href="donaciones.html">Donaciones</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+  <div class="mobile" id="mobileMenu">
+    <a href="../index.html">Inicio</a><a href="adopta.html">Adopta</a>
+    <a href="productos.html">Productos</a><a href="comunidad.html">Comunidad</a>
+    <a href="refugios.html">Refugios</a><a href="donaciones.html">Donaciones</a>
+  </div>
+</header>
 
-      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+<main>
+  <section class="commHero">
+    <div class="commHero__backdrop"></div>
+    <div class="container commHero__inner">
+      <div class="commHero__text">
+        <div class="commHero__eyebrow">🤝 Proyecto escolar</div>
+        <h1>Somos<br><span>PetHogar</span></h1>
+        <p>Una iniciativa que promueve la adopción responsable y el bienestar animal. Creemos que un rescate no termina en "salvarlo" — termina en darle un hogar seguro y permanente.</p>
+        <div class="commHero__pills">
+          <span class="pill">🐾 Adopción responsable</span>
+          <span class="pill">🤝 Comunidad</span>
+          <span class="pill pill--accent">🏠 Apoyo a refugios</span>
+        </div>
+      </div>
+      <div class="commHero__visual">
+        <div class="team-avatars">
+          <div class="avatar-item"><div class="avatar-circle">🧑‍💻</div><div class="avatar-name">Dev</div></div>
+          <div class="avatar-item"><div class="avatar-circle">🎨</div><div class="avatar-name">Diseño</div></div>
+          <div class="avatar-item"><div class="avatar-circle">📋</div><div class="avatar-name">PM</div></div>
+          <div class="avatar-item"><div class="avatar-circle">🐶</div><div class="avatar-name">Mascota</div></div>
+        </div>
+        <p style="text-align:center;color:var(--muted);font-size:13px;font-weight:700;margin-top:18px;">Equipo PetHogar • Cancún, Q.Roo</p>
+      </div>
     </div>
+  </section>
 
-    <div class="mobile" id="mobileMenu">
-      <a href="../index.html">Inicio</a>
-      <a href="adopta.html">Adopta</a>
-      <a href="productos.html">Productos</a>
-      <a href="comunidad.html">Comunidad</a>
-      <a href="refugios.html">Refugios</a>
-      <a href="donaciones.html">Donaciones</a>
+  <section class="valuesSection">
+    <div class="container">
+      <div class="valuesSection__head">
+        <h2>¿Quiénes somos?</h2>
+        <p>PetHogar es un proyecto escolar con propósito social y enfoque comunitario.</p>
+      </div>
+      <div class="valuesGrid">
+        <article class="valueCard valueCard--mission">
+          <span class="valueCard__icon">🎯</span>
+          <h3>Nuestra misión</h3>
+          <p>Facilitar la adopción responsable de perros y gatos rescatados, conectando mascotas con familias comprometidas y promoviendo el bienestar animal con información clara y accesible.</p>
+        </article>
+        <article class="valueCard valueCard--vision">
+          <span class="valueCard__icon">🔭</span>
+          <h3>Nuestra visión</h3>
+          <p>Ser la plataforma de referencia en la comunidad para impulsar el respeto animal, reducir el abandono y fortalecer la colaboración entre refugios y voluntarios.</p>
+        </article>
+        <article class="valueCard valueCard--values">
+          <span class="valueCard__icon">💡</span>
+          <h3>Nuestros valores</h3>
+          <ul class="valueList">
+            <li><strong>Responsabilidad:</strong> adoptar es un compromiso.</li>
+            <li><strong>Empatía:</strong> cada mascota tiene historia.</li>
+            <li><strong>Transparencia:</strong> información clara para decidir.</li>
+            <li><strong>Colaboración:</strong> comunidad + refugios = impacto.</li>
+          </ul>
+        </article>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section class="aboutHero">
-      <div class="container aboutHero__inner">
-        <div class="aboutHero__text">
-          <h1>Comunidad PetHogar</h1>
-          <p>
-            Somos una iniciativa enfocada en la adopción responsable y el bienestar animal.
-            Aquí creemos que un rescate no termina en “salvarlo”, sino en darle un hogar seguro.
-          </p>
-
-          <div class="aboutPills">
-            <span class="pill"> Adopción responsable</span>
-            <span class="pill"> Comunidad</span>
-            <span class="pill pill--accent"> Apoyo a refugios</span>
-          </div>
-        </div>
-
-        <div class="aboutHero__img">
-          <img src="../imagenes/LicPatas.jpeg" alt="Perro en adopción (imagen alusiva)">
-        </div>
+  <section class="goalsSection">
+    <div class="container">
+      <div class="goalsSection__head">
+        <h2>Nuestros objetivos</h2>
+        <p>Lo que nos propusimos lograr con este proyecto.</p>
       </div>
-    </section>
-
-    <section class="aboutSection">
-      <div class="container">
-        <div class="sectionHead">
-          <h2>¿Quiénes somos?</h2>
-          <p>PetHogar es un proyecto escolar con propósito social y enfoque comunitario.</p>
-        </div>
-
-        <div class="aboutGrid">
-          <article class="aboutCard">
-            <h3>Nuestra misión</h3>
-            <p>
-              Facilitar la adopción responsable de perros y gatos rescatados, conectando a las mascotas
-              con familias comprometidas, y promoviendo el bienestar animal mediante información clara y accesible.
-            </p>
-          </article>
-
-          <article class="aboutCard aboutCard--secondary">
-            <h3>Nuestra visión</h3>
-            <p>
-              Ser una plataforma de referencia en la comunidad para impulsar el respeto y la protección animal,
-              reduciendo el abandono y fortaleciendo la colaboración con refugios y voluntarios.
-            </p>
-          </article>
-
-          <article class="aboutCard aboutCard--accent">
-            <h3>Nuestros valores</h3>
-            <ul class="aboutList">
-              <li><strong>Responsabilidad:</strong> adoptar es un compromiso.</li>
-              <li><strong>Empatía:</strong> cada mascota tiene una historia.</li>
-              <li><strong>Transparencia:</strong> información clara para decidir mejor.</li>
-              <li><strong>Colaboración:</strong> comunidad + refugios = impacto real.</li>
-            </ul>
-          </article>
-        </div>
+      <div class="goalsGrid">
+        <article class="goalBox">
+          <h3>Objetivo general</h3>
+          <p>Desarrollar una plataforma web informativa que promueva la adopción responsable de perros y gatos rescatados, facilitando la visualización de mascotas disponibles y fomentando la participación comunitaria y el apoyo a refugios.</p>
+        </article>
+        <article class="goalBox">
+          <h3>Objetivos específicos</h3>
+          <ol>
+            <li>Mostrar un catálogo visual de mascotas disponibles para adopción.</li>
+            <li>Brindar orientación antes, durante y después de adoptar.</li>
+            <li>Incentivar el apoyo a refugios mediante un apartado de donaciones.</li>
+            <li>Promover campañas de esterilización y adopción comunitaria.</li>
+            <li>Diseñar una interfaz clara, adaptable y fácil de navegar.</li>
+          </ol>
+        </article>
       </div>
-    </section>
-
-    <section class="aboutSection">
-      <div class="container">
-        <div class="sectionHead">
-          <h2>Objetivos</h2>
-          
-        </div>
-
-        <div class="goals">
-          <article class="goalCard">
-            <h3>Objetivo general</h3>
-            <p>
-              Desarrollar una plataforma web informativa que promueva la adopción responsable de perros y gatos rescatados,
-              facilitando la visualización de mascotas disponibles y fomentando la participación comunitaria y el apoyo a refugios.
-            </p>
-          </article>
-
-          <article class="goalCard">
-            <h3>Objetivos específicos</h3>
-            <ol class="goalList">
-              <li>Mostrar un catálogo visual de mascotas disponibles para adopción con información básica.</li>
-              <li>Brindar una sección de orientación con recomendaciones antes, durante y después de adoptar.</li>
-              <li>Incentivar el apoyo a refugios mediante un apartado de donaciones (demostrativo).</li>
-              <li>Promover campañas de esterilización y adopción mediante información comunitaria.</li>
-              <li>Diseñar una interfaz clara, adaptable y fácil de navegar (HTML, CSS y JavaScript).</li>
-            </ol>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="aboutSection">
-      <div class="container">
-        <div class="sectionHead">
-          <h2>¿Cómo puedes participar?</h2>
-          <p>Adoptar, donar, compartir… y no abandonar (eso último vale por mil).</p>
-        </div>
-
-        <div class="participate">
-          <article class="miniCard">
-            <h3>🐾 Adopta</h3>
-            <p>Revisa el catálogo y elige con responsabilidad.</p>
-            <a class="btn btn--primary" href="adopta.html">Ver mascotas</a>
-          </article>
-
-          <article class="miniCard">
-            <h3> Dona</h3>
-            <p>Apoya con insumos o donación (demo) para rescates.</p>
-            <a class="btn btn--secondary" href="donaciones.html">Ir a donaciones</a>
-          </article>
-
-          <article class="miniCard">
-            <h3> Comparte</h3>
-            <p>Difunde campañas y adopciones en tu comunidad.</p>
-            <a class="btn btn--ghost" href="refugios.html">Ver campañas</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
-      <p class="muted">Comunidad primero </p>
     </div>
-  </footer>
+  </section>
 
-  <script src="../js/main.js"></script>
+  <section class="participateSection">
+    <div class="container">
+      <div class="participateSection__head">
+        <h2>¿Cómo puedes participar?</h2>
+        <p>Adoptar, donar, compartir… y no abandonar (eso último vale por mil).</p>
+      </div>
+      <div class="participateGrid">
+        <article class="partCard">
+          <span class="partCard__icon">🐾</span>
+          <h3>Adopta</h3>
+          <p>Revisa el catálogo y elige con responsabilidad. Cada mascota tiene una historia que merece un final feliz.</p>
+          <a class="btn btn--primary" href="adopta.html">Ver mascotas</a>
+        </article>
+        <article class="partCard">
+          <span class="partCard__icon">💜</span>
+          <h3>Dona</h3>
+          <p>Apoya con insumos o donación (demo) para rescates, vacunas y alimento en refugios de la zona.</p>
+          <a class="btn btn--secondary" href="donaciones.html">Ir a donaciones</a>
+        </article>
+        <article class="partCard">
+          <span class="partCard__icon">📢</span>
+          <h3>Comparte</h3>
+          <p>Difunde campañas y adopciones en tu comunidad. A veces un repost salva una vida.</p>
+          <a class="btn btn--ghost" href="refugios.html">Ver campañas</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <div>
+        <h2>¿Listo para cambiar una vida?</h2>
+        <p>Empieza por conocer a los perritos y gatitos que esperan un hogar.</p>
+      </div>
+      <a class="btn btn--primary" href="adopta.html">Ver mascotas 🐾</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+    <p class="muted">Comunidad primero 💜</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
 </body>
 </html>

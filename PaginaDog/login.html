@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar | Iniciar sesión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary:   #FF6B6B;
+      --secondary: #6D28D9;
+      --accent:    #22C55E;
+      --bg:        #FFF7ED;
+      --card:      #FFFFFF;
+      --text:      #111827;
+      --muted:     #6B7280;
+      --radius:    22px;
+      --shadow:    0 14px 40px rgba(17,24,39,.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--secondary);
+      box-shadow: 0 10px 26px rgba(0,0,0,.12);
+      padding: 14px 0;
+    }
+    .nav__inner {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; }
+    .brand__logo { font-size: 22px; background: rgba(255,255,255,.16); padding: 6px 10px; border-radius: 14px; }
+    .brand__name { font-family: Poppins, sans-serif; font-weight: 800; }
+    .nav__back { color: rgba(255,255,255,.85); font-size: 13px; font-weight: 600; text-decoration: none; background: rgba(255,255,255,.14); padding: 8px 14px; border-radius: 999px; }
+    .nav__back:hover { background: rgba(255,255,255,.22); }
+
+    /* ── MAIN LAYOUT ── */
+    .page {
+      flex: 1; display: grid; grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── LEFT PANEL ── */
+    .panel-left {
+      background: var(--secondary);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 60px 48px;
+    }
+    .panel-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 20% 80%, rgba(255,107,107,.30) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(255,255,255,.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    /* Floating paws */
+    .paws { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .paw  { position: absolute; font-size: 22px; opacity: 0; animation: floatPaw var(--dur,8s) var(--delay,0s) ease-in-out infinite; }
+    @keyframes floatPaw {
+      0%   { opacity: 0;    transform: translate(0,40px) rotate(var(--rot,0deg)) scale(.7); }
+      20%  { opacity: .22; }
+      80%  { opacity: .12; }
+      100% { opacity: 0;    transform: translate(var(--dx,20px),-110px) rotate(calc(var(--rot,0deg) + 30deg)) scale(1); }
+    }
+    .left-brand { position: relative; z-index: 2; text-align: center; margin-bottom: 44px; }
+    .left-brand__logo {
+      width: 88px; height: 88px; border-radius: 28px;
+      background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px; margin: 0 auto 20px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.18);
+    }
+    .left-brand__name { font-family: Poppins, sans-serif; font-size: 30px; font-weight: 800; color: #fff; }
+    .left-brand__tag  { margin-top: 6px; color: rgba(255,255,255,.70); font-size: 14px; font-weight: 600; }
+
+    .left-stats { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 360px; }
+    .stat-chip {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 16px; padding: 16px 14px; backdrop-filter: blur(8px);
+    }
+    .stat-chip__num   { font-family: Poppins, sans-serif; font-size: 26px; font-weight: 800; color: #fff; line-height: 1; }
+    .stat-chip__label { margin-top: 4px; color: rgba(255,255,255,.65); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; display: block; }
+
+    .testimonial {
+      position: relative; z-index: 2; margin-top: 24px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 18px; padding: 18px 20px; max-width: 360px; width: 100%;
+      backdrop-filter: blur(8px);
+    }
+    .testimonial__text   { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,.88); font-style: italic; }
+    .testimonial__author { margin-top: 12px; display: flex; align-items: center; gap: 10px; }
+    .testimonial__avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .testimonial__name { font-size: 13px; font-weight: 700; color: #fff; }
+    .testimonial__sub  { font-size: 12px; color: rgba(255,255,255,.60); }
+
+    /* ── RIGHT PANEL ── */
+    .panel-right {
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 60px 48px;
+      background: var(--bg);
+      position: relative;
+    }
+    .panel-right::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 50% at 100% 100%, rgba(109,40,217,.06) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 40% at 0% 0%, rgba(255,107,107,.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .login-box { width: 100%; max-width: 400px; position: relative; z-index: 1; }
+
+    .login-box__header { margin-bottom: 28px; }
+    .login-box__header h1 { font-family: Poppins, sans-serif; font-size: 28px; font-weight: 800; color: var(--text); }
+    .login-box__header p  { margin-top: 6px; color: var(--muted); font-size: 14.5px; }
+
+    /* TABS */
+    .tabs {
+      display: flex; background: rgba(109,40,217,.07);
+      border-radius: 14px; padding: 4px; margin-bottom: 24px;
+      border: 1.5px solid rgba(109,40,217,.14);
+    }
+    .tab-btn {
+      flex: 1; padding: 10px; border: none; background: transparent;
+      color: var(--muted); font-family: Inter, sans-serif; font-weight: 700;
+      font-size: 14px; border-radius: 10px; cursor: pointer; transition: all .2s;
+    }
+    .tab-btn.active {
+      background: var(--secondary); color: #fff;
+      box-shadow: 0 4px 16px rgba(109,40,217,.30);
+    }
+
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+
+    /* FIELDS */
+    .field-group { margin-bottom: 14px; }
+    .field-group label {
+      display: block; font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-bottom: 7px;
+    }
+    .field-wrap { position: relative; }
+    .field-wrap .field-icon {
+      position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+      font-size: 15px; pointer-events: none;
+    }
+    .field-wrap input {
+      width: 100%; background: #fff;
+      border: 1.5px solid rgba(109,40,217,.18);
+      border-radius: 14px; padding: 12px 12px 12px 42px;
+      color: var(--text); font-family: Inter, sans-serif;
+      font-size: 14.5px; font-weight: 500; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .field-wrap input::placeholder { color: #adb5bd; }
+    .field-wrap input:focus {
+      border-color: rgba(109,40,217,.55);
+      box-shadow: 0 0 0 3px rgba(109,40,217,.10);
+    }
+
+    .field-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .remember-check { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
+    .remember-check input { width: 15px; height: 15px; accent-color: var(--secondary); }
+    .forgot-link { font-size: 13px; font-weight: 700; color: var(--secondary); text-decoration: none; }
+    .forgot-link:hover { color: var(--primary); }
+
+    /* SUBMIT BTN */
+    .btn-submit {
+      width: 100%; padding: 14px; border: none; border-radius: 14px;
+      background: var(--secondary); color: #fff;
+      font-family: Poppins, sans-serif; font-size: 15px; font-weight: 700;
+      cursor: pointer; position: relative; overflow: hidden;
+      box-shadow: 0 8px 24px rgba(109,40,217,.32);
+      transition: filter .2s, transform .1s;
+    }
+    .btn-submit:hover  { filter: brightness(1.07); }
+    .btn-submit:active { transform: translateY(1px); }
+    .btn-submit::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.12), transparent);
+      pointer-events: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-submit.loading::before {
+      content: ''; display: inline-block;
+      width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin-right: 8px; vertical-align: middle;
+    }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 12px; margin: 18px 0; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(109,40,217,.12); }
+
+    /* SOCIAL BTNS */
+    .social-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .social-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px; border: 1.5px solid rgba(109,40,217,.16);
+      border-radius: 12px; background: #fff; color: var(--text);
+      font-family: Inter, sans-serif; font-weight: 700; font-size: 13.5px;
+      cursor: pointer; text-decoration: none;
+      transition: background .15s, border-color .15s, box-shadow .15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .social-btn:hover { background: rgba(109,40,217,.04); border-color: rgba(109,40,217,.28); }
+
+    /* REGISTER EXTRA */
+    .register-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+
+    /* MSG */
+    .msg-area { min-height: 18px; margin-bottom: 12px; font-size: 13px; font-weight: 700; border-radius: 10px; }
+    .msg-area.error   { color: #991b1b; background: rgba(255,107,107,.10); padding: 8px 12px; }
+    .msg-area.success { color: #166534; background: rgba(34,197,94,.12);   padding: 8px 12px; }
+
+    /* BACK LINK */
+    .back-link { display: block; text-align: center; margin-top: 24px; color: var(--muted); font-size: 13px; font-weight: 500; text-decoration: none; }
+    .back-link span { color: var(--secondary); font-weight: 700; }
+
+    /* RESPONSIVE */
+    @media (max-width: 780px) {
+      .page { grid-template-columns: 1fr; }
+      .panel-left { display: none; }
+      .panel-right { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__logo">🐾</span>
+        <span class="brand__name">PetHogar</span>
+      </a>
+      <a class="nav__back" href="index.html">← Volver al inicio</a>
+    </div>
+  </header>
+
+  <div class="page">
+
+    <!-- ── LEFT ── -->
+    <div class="panel-left">
+      <div class="paws" id="pawsContainer"></div>
+
+      <div class="left-brand">
+        <div class="left-brand__logo">🐾</div>
+        <div class="left-brand__name">PetHogar</div>
+        <div class="left-brand__tag">Conectando mascotas con familias</div>
+      </div>
+
+      <div class="left-stats">
+        <div class="stat-chip"><div class="stat-chip__num">2.4k</div><span class="stat-chip__label">Adopciones</span></div>
+        <div class="stat-chip"><div class="stat-chip__num">180+</div><span class="stat-chip__label">Refugios</span></div>
+        <div class="stat-chip"><div class="stat-chip__num">5.1k</div><span class="stat-chip__label">Usuarios</span></div>
+        <div class="stat-chip"><div class="stat-chip__num">98%</div><span class="stat-chip__label">Satisfacción</span></div>
+      </div>
+
+      <div class="testimonial">
+        <p class="testimonial__text">"Gracias a PetHogar encontré a Canela en solo 3 días. El proceso fue sencillo y el seguimiento fue increíble."</p>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar">🐶</div>
+          <div>
+            <div class="testimonial__name">María González</div>
+            <div class="testimonial__sub">Adoptante en Cancún</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT ── -->
+    <div class="panel-right">
+      <div class="login-box">
+
+        <div class="login-box__header">
+          <h1>Bienvenido de vuelta 👋</h1>
+          <p>Inicia sesión o crea tu cuenta para continuar.</p>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" id="tabLogin"    onclick="switchTab('login')">Iniciar sesión</button>
+          <button class="tab-btn"        id="tabRegister" onclick="switchTab('register')">Crear cuenta</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="form-panel active" id="panelLogin">
+          <div class="msg-area" id="loginMsg"></div>
+
+          <div class="field-group">
+            <label>Correo electrónico</label>
+            <div class="field-wrap">
+              <span class="field-icon">📧</span>
+              <input type="email" id="loginEmail" placeholder="tu@correo.com" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Contraseña</label>
+            <div class="field-wrap">
+              <span class="field-icon">🔒</span>
+              <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label class="remember-check">
+              <input type="checkbox" id="rememberMe"> Recordarme
+            </label>
+            <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button class="btn-submit" id="loginBtn" onclick="handleLogin()">
+            Entrar a PetHogar 🐾
+          </button>
+
+          <div class="divider">o continúa con</div>
+
+          <div class="social-btns">
+            <a href="#" class="social-btn">
+              <svg width="17" height="17" viewBox="0 0 48 48"><path d="M43.6 20H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-4z" fill="#FFC107"/><path d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" fill="#FF3D00"/><path d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z" fill="#4CAF50"/><path d="M43.6 20H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.7-.4-4z" fill="#1976D2"/></svg>
+              Google
+            </a>
+            <a href="#" class="social-btn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.8-4.7 4.53-4.7 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>
+              Facebook
+            </a>
+          </div>
+        </div>
+
+        <!-- REGISTER -->
+        <div class="form-panel" id="panelRegister">
+          <div class="msg-area" id="regMsg"></div>
+
+          <div class="register-row">
+            <div class="field-group" style="margin-bottom:0">
+              <label>Nombre</label>
+              <div class="field-wrap">
+                <span class="field-icon">👤</span>
+                <input type="text" id="regNombre" placeholder="Ana">
+              </div>
+            </div>
+            <div class="field-group" style="margin-bottom:0">
+              <label>Apellido</label>
+              <div class="field-wrap">
+                <span class="field-icon">👤</span>
+                <input type="text" id="regApellido" placeholder="García">
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group" style="margin-top:14px">
+            <label>Correo electrónico</label>
+            <div class="field-wrap">
+              <span class="field-icon">📧</span>
+              <input type="email" id="regEmail" placeholder="tu@correo.com">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Ciudad</label>
+            <div class="field-wrap">
+              <span class="field-icon">📍</span>
+              <input type="text" id="regCiudad" placeholder="Cancún, Q.Roo">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Contraseña</label>
+            <div class="field-wrap">
+              <span class="field-icon">🔒</span>
+              <input type="password" id="regPass" placeholder="Mínimo 8 caracteres">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Confirmar contraseña</label>
+            <div class="field-wrap">
+              <span class="field-icon">🔑</span>
+              <input type="password" id="regPass2" placeholder="Repite tu contraseña">
+            </div>
+          </div>
+
+          <button class="btn-submit" id="regBtn" onclick="handleRegister()">
+            Crear mi cuenta 🐾
+          </button>
+        </div>
+
+        <a href="index.html" class="back-link">← Explorar sin cuenta &nbsp;<span>ver mascotas</span></a>
+      </div>
+    </div>
+
+  </div><!-- end .page -->
+
+  <script>
+    /* TABS */
+    function switchTab(tab) {
+      document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+      document.getElementById('panelLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('panelRegister').classList.toggle('active', tab === 'register');
+    }
+
+    function showMsg(id, text, type = 'error') {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.className = `msg-area${text ? ' ' + type : ''}`;
+    }
+
+    /* LOGIN */
+    function handleLogin() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass  = document.getElementById('loginPass').value;
+      const btn   = document.getElementById('loginBtn');
+      showMsg('loginMsg', '');
+      if (!email.includes('@'))   return showMsg('loginMsg', '⚠ Escribe un correo válido.');
+      if (pass.length < 6)        return showMsg('loginMsg', '⚠ La contraseña debe tener al menos 6 caracteres.');
+      btn.classList.add('loading'); btn.textContent = ' Verificando...';
+      setTimeout(() => {
+        btn.classList.remove('loading'); btn.textContent = 'Entrar a PetHogar 🐾';
+        showMsg('loginMsg', '✅ ¡Bienvenido! Redirigiendo…', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1300);
+      }, 1500);
+    }
+
+    /* REGISTER */
+    function handleRegister() {
+      const nombre   = document.getElementById('regNombre').value.trim();
+      const apellido = document.getElementById('regApellido').value.trim();
+      const email    = document.getElementById('regEmail').value.trim();
+      const ciudad   = document.getElementById('regCiudad').value.trim();
+      const pass     = document.getElementById('regPass').value;
+      const pass2    = document.getElementById('regPass2').value;
+      const btn      = document.getElementById('regBtn');
+      showMsg('regMsg', '');
+      if (!nombre || !apellido)    return showMsg('regMsg', '⚠ Escribe tu nombre completo.');
+      if (!email.includes('@'))    return showMsg('regMsg', '⚠ Correo inválido.');
+      if (!ciudad)                 return showMsg('regMsg', '⚠ Indica tu ciudad.');
+      if (pass.length < 8)         return showMsg('regMsg', '⚠ Contraseña mínimo 8 caracteres.');
+      if (pass !== pass2)          return showMsg('regMsg', '⚠ Las contraseñas no coinciden.');
+      btn.classList.add('loading'); btn.textContent = ' Creando cuenta...';
+      setTimeout(() => {
+        btn.classList.remove('loading'); btn.textContent = 'Crear mi cuenta 🐾';
+        showMsg('regMsg', `✅ ¡Cuenta creada, ${nombre}! Iniciando sesión…`, 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1400);
+      }, 1600);
+    }
+
+    /* ENTER KEY */
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      if (document.getElementById('panelLogin').classList.contains('active')) handleLogin();
+      else handleRegister();
+    });
+
+    /* PAWS FLOTANTES */
+    const container = document.getElementById('pawsContainer');
+    for (let i = 0; i < 9; i++) {
+      const el = document.createElement('span');
+      el.className = 'paw'; el.textContent = '🐾';
+      el.style.setProperty('--dur',   `${6 + Math.random() * 6}s`);
+      el.style.setProperty('--delay', `${i * 0.7}s`);
+      el.style.setProperty('--rot',   `${Math.random() * 60 - 30}deg`);
+      el.style.setProperty('--dx',    `${Math.random() * 60 - 30}px`);
+      el.style.left = `${8 + Math.random() * 84}%`;
+      el.style.top  = `${8 + Math.random() * 84}%`;
+      container.appendChild(el);
+    }
+  </script>
+</body>
+</html>

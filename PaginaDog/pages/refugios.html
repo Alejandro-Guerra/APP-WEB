@@ -8,8 +8,133 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="../css/styles.css" />
+
+  <style>
+    :root { --ref-gradient: linear-gradient(135deg, rgba(109,40,217,.10), rgba(255,107,107,.10)); }
+
+    /* HERO */
+    .refHero { padding: 0; position: relative; overflow: hidden; }
+    .refHero__backdrop {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 0% 100%, rgba(109,40,217,.13) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 100% 0%, rgba(255,107,107,.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .refHero__inner {
+      display: grid; grid-template-columns: 1.05fr .95fr;
+      gap: 32px; align-items: center; padding: 48px 0 40px; position: relative; z-index: 1;
+    }
+    .refHero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(109,40,217,.10); border: 1px solid rgba(109,40,217,.20);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 12px; font-weight: 800; color: var(--secondary);
+      text-transform: uppercase; letter-spacing: .6px; margin-bottom: 16px;
+    }
+    .refHero__text h1 {
+      font-family: Poppins, sans-serif; font-size: clamp(26px, 3vw, 44px);
+      font-weight: 800; line-height: 1.1; color: var(--text); margin: 0 0 14px;
+    }
+    .refHero__text h1 span { color: var(--secondary); }
+    .refHero__text p { color: var(--muted); font-size: 15.5px; line-height: 1.65; margin: 0 0 22px; max-width: 52ch; }
+    .refHero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .refHero__note {
+      margin-top: 20px; display: flex; align-items: flex-start; gap: 10px;
+      background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.18);
+      border-radius: 14px; padding: 12px 16px; font-size: 13px; font-weight: 600;
+      color: #c0392b; max-width: 48ch;
+    }
+    .refHero__imgCard {
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 24px 64px rgba(109,40,217,.18), 0 0 0 6px rgba(109,40,217,.07);
+      aspect-ratio: 4/3;
+    }
+    .refHero__imgCard img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .refHero__media { position: relative; }
+    .refHero__badge {
+      position: absolute; bottom: -14px; left: 24px;
+      background: #fff; border-radius: 16px; padding: 12px 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+      display: flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(17,24,39,.06);
+    }
+    .refHero__badge .badge-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(109,40,217,.12); display: flex; align-items:center; justify-content:center; font-size: 20px;
+    }
+    .refHero__badge .badge-text strong { display: block; font-family: Poppins, sans-serif; font-size: 16px; font-weight: 800; color: var(--secondary); line-height: 1; }
+    .refHero__badge .badge-text span { font-size: 12px; font-weight: 700; color: var(--muted); }
+
+    /* STATS */
+    .statsStrip { padding: 44px 0 24px; }
+    .statsStrip__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .statBox {
+      background: #fff; border-radius: 20px; padding: 20px 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.07); border: 1px solid rgba(17,24,39,.06); text-align: center;
+    }
+    .statBox__icon { font-size: 28px; margin-bottom: 8px; display: block; }
+    .statBox__num { font-family: Poppins, sans-serif; font-size: 26px; font-weight: 800; color: var(--secondary); display: block; line-height: 1; }
+    .statBox__label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; display: block; }
+
+    /* MAP */
+    .mapSection { padding: 8px 0 32px; }
+    .mapSection__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+    .mapSection__head h2 { font-family: Poppins, sans-serif; color: var(--text); margin: 0 0 4px; }
+    .mapSection__head p { margin: 0; color: var(--muted); font-size: 14px; }
+    .mapCard { background: #fff; border-radius: 24px; padding: 10px; box-shadow: 0 14px 40px rgba(0,0,0,.09); border: 1px solid rgba(17,24,39,.06); overflow: hidden; }
+    .mapCard iframe { width: 100%; height: 440px; border: 0; border-radius: 18px; display: block; }
+
+    /* ORGS */
+    .orgsSection { padding: 8px 0 40px; }
+    .orgsSection__head { margin-bottom: 22px; }
+    .orgsSection__head h2 { font-family: Poppins, sans-serif; color: var(--text); margin: 0 0 6px; }
+    .orgsSection__head p { color: var(--muted); font-size: 14.5px; margin: 0; }
+    .orgGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .orgCard {
+      background: #fff; border-radius: 22px; padding: 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08); border: 1px solid rgba(17,24,39,.06);
+      overflow: hidden; transition: transform .18s ease, box-shadow .18s ease;
+      display: flex; flex-direction: column;
+    }
+    .orgCard:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.12); }
+    .orgCard__header { padding: 20px 22px 16px; border-bottom: 1px solid rgba(17,24,39,.06); display: flex; gap: 14px; align-items: flex-start; }
+    .orgCard__icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+    .orgCard__icon--municipal { background: rgba(255,107,107,.12); }
+    .orgCard__icon--santuario { background: rgba(109,40,217,.12); }
+    .orgCard__icon--rescate   { background: rgba(34,197,94,.12); }
+    .orgCard__icon--esteril   { background: rgba(251,191,36,.12); }
+    .orgCard__title-wrap { flex: 1; min-width: 0; }
+    .orgCard__title-wrap h3 { font-family: Poppins, sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 8px; line-height: 1.3; }
+    .orgCard__body { padding: 16px 22px; flex: 1; }
+    .orgCard__info-row { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 9px; font-size: 13.5px; color: var(--muted); font-weight: 600; }
+    .orgCard__info-row .ic { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .orgCard__info-row a { color: var(--secondary); text-decoration: none; word-break: break-all; }
+    .orgCard__info-row a:hover { text-decoration: underline; }
+    .orgCard__footer { padding: 14px 22px 18px; display: flex; gap: 10px; flex-wrap: wrap; border-top: 1px solid rgba(17,24,39,.05); }
+
+    /* TIPS */
+    .tipsBanner {
+      margin: 0 0 40px; background: var(--ref-gradient); border-radius: 22px;
+      border: 1px solid rgba(17,24,39,.06); padding: 26px 28px;
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .tipsBanner__icon { font-size: 48px; flex-shrink: 0; }
+    .tipsBanner__text { flex: 1; min-width: 200px; }
+    .tipsBanner__text h3 { font-family: Poppins, sans-serif; color: var(--secondary); margin: 0 0 6px; }
+    .tipsBanner__text p { color: var(--muted); margin: 0; font-size: 14px; }
+
+    @media (max-width: 900px) {
+      .refHero__inner { grid-template-columns: 1fr; }
+      .refHero__media { display: none; }
+      .statsStrip__grid { grid-template-columns: repeat(2, 1fr); }
+      .orgGrid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .mapCard iframe { height: 320px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -19,7 +144,6 @@
         <span class="brand__logo">🐾</span>
         <span class="brand__name">PetHogar</span>
       </a>
-
       <nav class="menu" aria-label="Menú principal">
         <a class="menu__link" href="../index.html">Inicio</a>
         <a class="menu__link" href="adopta.html">Adopta</a>
@@ -28,10 +152,8 @@
         <a class="menu__link is-active" href="refugios.html">Refugios</a>
         <a class="menu__link" href="donaciones.html">Donaciones</a>
       </nav>
-
       <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
-
     <div class="mobile" id="mobileMenu">
       <a href="../index.html">Inicio</a>
       <a href="adopta.html">Adopta</a>
@@ -43,31 +165,81 @@
   </header>
 
   <main>
+
     <section class="refHero">
+      <div class="refHero__backdrop"></div>
       <div class="container refHero__inner">
-        <div>
-          <h1>Refugios y apoyo en Cancún</h1>
+        <div class="refHero__text">
+          <div class="refHero__eyebrow">📍 Cancún &amp; Zona Metropolitana</div>
+          <h1>Refugios y centros<br><span>de rescate</span> cercanos</h1>
           <p>
-            Aquí puedes ubicar organizaciones y puntos de ayuda. Por ahora mostramos Cancún y zona cercana.
+            Encuentra organizaciones activas en Cancún y municipios cercanos. Ubica refugios,
+            contacta voluntarios y apoya a quienes cuidan a los animales que nadie eligió.
           </p>
-          <div class="refNote">
-            *Mapa incrustado con resultados de Google Maps (sin API, solo demostración front-end).
+          <div class="refHero__actions">
+            <a class="btn btn--primary" href="#mapa">Ver en el mapa</a>
+            <a class="btn btn--ghost" href="donaciones.html">Quiero donar</a>
+          </div>
+          <div class="refHero__note">
+            <span>ℹ️</span>
+            Datos actualizados manualmente. Si tu organización no aparece,
+            <a href="comunidad.html" style="color:inherit;font-weight:800;text-decoration:underline;">contáctanos</a>.
           </div>
         </div>
-
-        <div class="refHero__img">
-          <img src="../imagenes/RefugiosHero.jpeg" alt="Imagen alusiva a refugios">
+        <div class="refHero__media">
+          <div class="refHero__imgCard">
+            <img src="../Imagenes/RefugiosHero.jpeg" alt="Refugio de animales en Cancún">
+          </div>
+          <div class="refHero__badge">
+            <div class="badge-icon">🏠</div>
+            <div class="badge-text">
+              <strong>4+</strong>
+              <span>organizaciones activas</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="refSection">
+    <section class="statsStrip">
       <div class="container">
-        <div class="sectionHead">
-          <h2>Mapa</h2>
-          <p>Se muestran refugios en Cancún según búsqueda en Google Maps.</p>
+        <div class="statsStrip__grid">
+          <div class="statBox">
+            <span class="statBox__icon">🏠</span>
+            <span class="statBox__num">4</span>
+            <span class="statBox__label">Refugios registrados</span>
+          </div>
+          <div class="statBox">
+            <span class="statBox__icon">🐾</span>
+            <span class="statBox__num">180+</span>
+            <span class="statBox__label">Animales rescatados</span>
+          </div>
+          <div class="statBox">
+            <span class="statBox__icon">💉</span>
+            <span class="statBox__num">300+</span>
+            <span class="statBox__label">Esterilizaciones</span>
+          </div>
+          <div class="statBox">
+            <span class="statBox__icon">🤝</span>
+            <span class="statBox__num">50+</span>
+            <span class="statBox__label">Voluntarios activos</span>
+          </div>
         </div>
+      </div>
+    </section>
 
+    <section class="mapSection" id="mapa">
+      <div class="container">
+        <div class="mapSection__head">
+          <div>
+            <h2>Mapa de refugios</h2>
+            <p>Resultados de Google Maps — refugios y puntos de ayuda en Cancún.</p>
+          </div>
+          <a class="btn btn--ghost" target="_blank"
+             href="https://www.google.com/maps/search/refugios+de+animales+Cancún">
+            Abrir en Google Maps ↗
+          </a>
+        </div>
         <div class="mapCard">
           <iframe
             title="Mapa de refugios en Cancún"
@@ -79,91 +251,118 @@
       </div>
     </section>
 
-    <section class="refSection">
+    <section class="orgsSection">
       <div class="container">
-        <div class="sectionHead">
+        <div class="orgsSection__head">
           <h2>Organizaciones recomendadas</h2>
-          <p>Tarjetas informativas + botón para abrir la ubicación en Maps.</p>
+          <p>Contacta directamente con cada refugio o utiliza el botón para verlos en el mapa.</p>
         </div>
+        <div class="orgGrid">
 
-        <div class="refGrid">
-          <article class="refCard">
-            <div class="refCard__top">
-              <h3>Dirección de Protección y Bienestar Animal (Cancún)</h3>
-              <span class="tag tag--primary">Municipal</span>
+          <article class="orgCard">
+            <div class="orgCard__header">
+              <div class="orgCard__icon orgCard__icon--municipal">🏛️</div>
+              <div class="orgCard__title-wrap">
+                <h3>Dirección de Protección y Bienestar Animal</h3>
+                <span class="tag tag--primary">Municipal</span>
+              </div>
             </div>
-            <p class="refMeta">
-              Dirección: Av. Nichupté, Supermanzana 99, Lote 1, Cancún, Q. Roo<br>
-              Tel: 998 892 3326
-            </p>
-            <div class="refActions">
-              <a class="btn btn--primary" target="_blank"
-                 href="https://www.google.com/maps?q=Avenida%20Nichupte%20Supermanzana%2099%20Lote%201%20Cancun%20Quintana%20Roo">
-                Ver en mapa
-              </a>
+            <div class="orgCard__body">
+              <div class="orgCard__info-row"><span class="ic">📍</span> Av. Nichupté, Supermanzana 99, Lote 1, Cancún, Q. Roo</div>
+              <div class="orgCard__info-row"><span class="ic">📞</span><a href="tel:9988923326">998 892 3326</a></div>
+              <div class="orgCard__info-row"><span class="ic">🕐</span> Lun – Vie, 8:00 – 16:00 hrs</div>
+              <div class="orgCard__info-row"><span class="ic">ℹ️</span> Servicio municipal de rescate, esterilización y adopción para Benito Juárez.</div>
+            </div>
+            <div class="orgCard__footer">
+              <a class="btn btn--primary" target="_blank" href="https://www.google.com/maps?q=Avenida+Nichupte+Supermanzana+99+Lote+1+Cancun+Quintana+Roo">📍 Ver en mapa</a>
               <a class="btn btn--ghost" href="adopta.html">Ver adopciones</a>
             </div>
           </article>
 
-          <article class="refCard">
-            <div class="refCard__top">
-              <h3>Tierra de Animales (zona Cancún)</h3>
-              <span class="tag tag--secondary">Santuario</span>
+          <article class="orgCard">
+            <div class="orgCard__header">
+              <div class="orgCard__icon orgCard__icon--santuario">🌿</div>
+              <div class="orgCard__title-wrap">
+                <h3>Tierra de Animales</h3>
+                <span class="tag tag--secondary">Santuario</span>
+              </div>
             </div>
-            <p class="refMeta">
-              Carretera Libre Cancún–Mérida km 282.5, Leona Vicario, Benito Juárez, Q. Roo
-            </p>
-            <div class="refActions">
-              <a class="btn btn--secondary" target="_blank"
-                 href="https://www.google.com/maps?q=Carretera%20Libre%20Cancun%20Merida%20km%20282.5%20Leona%20Vicario%20Quintana%20Roo">
-                Ver en mapa
-              </a>
+            <div class="orgCard__body">
+              <div class="orgCard__info-row"><span class="ic">📍</span> Carretera Libre Cancún–Mérida km 282.5, Leona Vicario, Q. Roo</div>
+              <div class="orgCard__info-row"><span class="ic">🌐</span><a href="https://www.tierradeanimales.org" target="_blank">tierradeanimales.org</a></div>
+              <div class="orgCard__info-row"><span class="ic">ℹ️</span> Santuario para animales en situación de abandono severo o maltrato. Acepta voluntarios de fin de semana.</div>
+            </div>
+            <div class="orgCard__footer">
+              <a class="btn btn--secondary" target="_blank" href="https://www.google.com/maps?q=Tierra+de+Animales+Leona+Vicario+Quintana+Roo">📍 Ver en mapa</a>
               <a class="btn btn--ghost" href="donaciones.html">Apoyar</a>
             </div>
           </article>
 
-          <article class="refCard">
-            <div class="refCard__top">
-              <h3>Dejando Huellas por Cancún A.C.</h3>
-              <span class="tag tag--accent">Rescate</span>
+          <article class="orgCard">
+            <div class="orgCard__header">
+              <div class="orgCard__icon orgCard__icon--rescate">🐕</div>
+              <div class="orgCard__title-wrap">
+                <h3>Dejando Huellas por Cancún A.C.</h3>
+                <span class="tag tag--accent">Rescate</span>
+              </div>
             </div>
-            <p class="refMeta">
-              Tel: +52 998 870 1062<br>
-              Correo: fundaciondejandohuellascancun@gmail.com
-            </p>
-            <div class="refActions">
-              <a class="btn btn--primary" target="_blank"
-                 href="https://www.google.com/maps?q=Dejando%20Huellas%20por%20Cancun%20A.C.">
-                Ver en mapa
-              </a>
+            <div class="orgCard__body">
+              <div class="orgCard__info-row"><span class="ic">📞</span><a href="tel:+529988701062">+52 998 870 1062</a></div>
+              <div class="orgCard__info-row"><span class="ic">✉️</span><a href="mailto:fundaciondejandohuellascancun@gmail.com">fundaciondejandohuellascancun@gmail.com</a></div>
+              <div class="orgCard__info-row"><span class="ic">ℹ️</span> ONG local dedicada al rescate de calle, rehabilitación y búsqueda de hogar permanente.</div>
+            </div>
+            <div class="orgCard__footer">
+              <a class="btn btn--primary" target="_blank" href="https://www.google.com/maps?q=Dejando+Huellas+por+Cancun+A.C.">📍 Ver en mapa</a>
               <a class="btn btn--ghost" href="donaciones.html">Donar</a>
             </div>
           </article>
 
-          <article class="refCard">
-            <div class="refCard__top">
-              <h3>Paws in Action Cancun</h3>
-              <span class="tag tag--accent">Esterilización</span>
+          <article class="orgCard">
+            <div class="orgCard__header">
+              <div class="orgCard__icon orgCard__icon--esteril">✂️</div>
+              <div class="orgCard__title-wrap">
+                <h3>Paws in Action Cancun</h3>
+                <span class="tag" style="background:rgba(251,191,36,.18);color:#92400e;padding:6px 10px;border-radius:999px;font-weight:900;font-size:12px;">Esterilización</span>
+              </div>
             </div>
-            <p class="refMeta">
-              WhatsApp: +52 998 845 2306<br>
-              Correo: pawsinactioncancun@gmail.com
-            </p>
-            <div class="refActions">
-              <a class="btn btn--secondary" target="_blank"
-                 href="https://www.google.com/maps?q=Paws%20in%20Action%20Cancun">
-                Ver en mapa
-              </a>
+            <div class="orgCard__body">
+              <div class="orgCard__info-row"><span class="ic">💬</span> WhatsApp: <a href="https://wa.me/529988452306" target="_blank">+52 998 845 2306</a></div>
+              <div class="orgCard__info-row"><span class="ic">✉️</span><a href="mailto:pawsinactioncancun@gmail.com">pawsinactioncancun@gmail.com</a></div>
+              <div class="orgCard__info-row"><span class="ic">ℹ️</span> Programa de esterilización gratuita o a bajo costo para comunidades vulnerables de Cancún.</div>
+            </div>
+            <div class="orgCard__footer">
+              <a class="btn btn--secondary" target="_blank" href="https://www.google.com/maps?q=Paws+in+Action+Cancun">📍 Ver en mapa</a>
               <a class="btn btn--ghost" href="comunidad.html">Conocer más</a>
             </div>
           </article>
-        </div>
 
-        <div class="refFooterNote">
-          Si quieres, luego hacemos un “mapa con pins personalizados” usando Leaflet + OpenStreetMap (sin pagar API).
         </div>
       </div>
     </section>
+
+    <section style="padding: 0 0 48px;">
+      <div class="container">
+        <div class="tipsBanner">
+          <div class="tipsBanner__icon">🗺️</div>
+          <div class="tipsBanner__text">
+            <h3>¿Quieres mapa con pins personalizados?</h3>
+            <p>Podemos implementar un mapa interactivo con Leaflet + OpenStreetMap (sin costo de API) donde cada organización tenga su propio marcador, foto y botón de contacto directo.</p>
+          </div>
+          <a class="btn btn--secondary" href="comunidad.html">Proponer mejora</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta__inner">
+        <div>
+          <h2>¿Tu refugio no aparece aquí?</h2>
+          <p>Contáctanos y te agregamos al directorio sin costo.</p>
+        </div>
+        <a class="btn btn--primary" href="comunidad.html">Contactar al equipo 🐾</a>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
