@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar | Iniciar sesión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, system-ui, sans-serif;
+      background: #0f0c29;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Fondo animado */
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .55;
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .bg-blob--1 {
+      width: 500px; height: 500px;
+      background: #6D28D9;
+      top: -150px; left: -150px;
+      animation-delay: 0s;
+    }
+    .bg-blob--2 {
+      width: 400px; height: 400px;
+      background: #FF6B6B;
+      bottom: -100px; right: -100px;
+      animation-delay: -3s;
+    }
+    .bg-blob--3 {
+      width: 300px; height: 300px;
+      background: #22C55E;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -5s;
+      opacity: .20;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-30px) scale(1.05); }
+    }
+
+    /* Card principal */
+    .loginCard {
+      position: relative;
+      z-index: 10;
+      width: min(440px, calc(100% - 32px));
+      background: rgba(255, 255, 255, .07);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 28px;
+      padding: 40px 36px 36px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.4);
+    }
+
+    /* Logo + título */
+    .loginCard__top {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .loginCard__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #6D28D9, #FF6B6B);
+      border-radius: 22px;
+      font-size: 36px;
+      margin-bottom: 16px;
+      box-shadow: 0 12px 30px rgba(109,40,217,.5);
+    }
+    .loginCard__title {
+      font-family: Poppins, sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .loginCard__sub {
+      color: rgba(255,255,255,.55);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Inputs */
+    .loginCard__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .inputGroup label {
+      color: rgba(255,255,255,.75);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .inputWrap {
+      position: relative;
+    }
+    .inputWrap .inputIcon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+    }
+    .inputWrap input {
+      width: 100%;
+      padding: 13px 16px 13px 42px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      outline: none;
+      transition: border-color .2s, background .2s;
+      font-family: Inter, sans-serif;
+    }
+    .inputWrap input::placeholder { color: rgba(255,255,255,.30); }
+    .inputWrap input:focus {
+      border-color: #6D28D9;
+      background: rgba(109,40,217,.15);
+    }
+
+    /* Botón */
+    .loginCard__btn {
+      margin-top: 6px;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #6D28D9, #9333ea);
+      border: 0;
+      border-radius: 14px;
+      color: #fff;
+      font-family: Poppins, sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .1s, box-shadow .2s;
+      box-shadow: 0 8px 24px rgba(109,40,217,.5);
+      letter-spacing: .3px;
+    }
+    .loginCard__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(109,40,217,.6);
+    }
+    .loginCard__btn:active { transform: translateY(0); }
+
+    /* Mensaje */
+    .loginCard__msg {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      min-height: 18px;
+      margin-top: 10px;
+    }
+    .loginCard__msg--error { color: #FF6B6B; }
+    .loginCard__msg--ok    { color: #22C55E; }
+
+    /* Links */
+    .loginCard__divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 16px;
+      color: rgba(255,255,255,.25);
+      font-size: 12px;
+    }
+    .loginCard__divider::before,
+    .loginCard__divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,.12);
+    }
+    .loginCard__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+    .loginCard__links a {
+      color: rgba(255,255,255,.60);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .loginCard__links a strong {
+      color: #a78bfa;
+      font-weight: 800;
+    }
+    .loginCard__links a:hover { color: #fff; }
+
+    /* Chips flotantes de fondo */
+    .floatChip {
+      position: fixed;
+      color: rgba(255,255,255,.12);
+      font-size: 48px;
+      pointer-events: none;
+      animation: floatChip 10s ease-in-out infinite;
+      z-index: 1;
+    }
+    .floatChip:nth-child(1) { top: 10%; left: 8%;  animation-delay: 0s; }
+    .floatChip:nth-child(2) { top: 70%; left: 5%;  animation-delay: -4s; font-size: 36px; }
+    .floatChip:nth-child(3) { top: 20%; right: 8%; animation-delay: -2s; font-size: 40px; }
+    .floatChip:nth-child(4) { top: 75%; right: 6%; animation-delay: -6s; font-size: 32px; }
+    @keyframes floatChip {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%       { transform: translateY(-20px) rotate(10deg); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Blobs de fondo -->
+<div class="bg-blob bg-blob--1"></div>
+<div class="bg-blob bg-blob--2"></div>
+<div class="bg-blob bg-blob--3"></div>
+
+<!-- Emojis flotantes -->
+<span class="floatChip">🐶</span>
+<span class="floatChip">🐱</span>
+<span class="floatChip">🐾</span>
+<span class="floatChip">💜</span>
+
+<!-- Card de login -->
+<div class="loginCard">
+  <div class="loginCard__top">
+    <div class="loginCard__icon">🐾</div>
+    <h1 class="loginCard__title">PetHogar</h1>
+    <p class="loginCard__sub">Inicia sesión para continuar</p>
+  </div>
+
+  <form class="loginCard__form" id="loginForm">
+    <div class="inputGroup">
+      <label>Correo electrónico</label>
+      <div class="inputWrap">
+        <span class="inputIcon">✉️</span>
+        <input id="lCorreo" type="email" placeholder="ejemplo@correo.com" required />
+      </div>
+    </div>
+
+    <div class="inputGroup">
+      <label>Contraseña</label>
+      <div class="inputWrap">
+        <span class="inputIcon">🔒</span>
+        <input id="lPass" type="password" placeholder="Tu contraseña" required />
+      </div>
+    </div>
+
+    <button class="loginCard__btn" type="submit">Iniciar sesión →</button>
+    <p class="loginCard__msg" id="loginMsg" aria-live="polite"></p>
+  </form>
+
+  <div class="loginCard__divider">¿No tienes cuenta?</div>
+
+  <div class="loginCard__links">
+    <a href="registro.html">Crear cuenta gratis <strong>→</strong></a>
+    <a href="../index.html">← Volver al inicio</a>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+  const loginForm = document.getElementById('loginForm');
+  const loginMsg  = document.getElementById('loginMsg');
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    loginMsg.textContent = 'Verificando...';
+    loginMsg.className = 'loginCard__msg';
+
+    const res  = await fetch('../api/usuarios.php', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action:   'login',
+        correo:   document.getElementById('lCorreo').value.trim(),
+        password: document.getElementById('lPass').value
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+      loginMsg.textContent = data.error;
+      loginMsg.className = 'loginCard__msg loginCard__msg--error';
+      return;
+    }
+
+    localStorage.setItem('ph_usuario', JSON.stringify({ id: data.id, nombre: data.nombre, rol: data.rol }));
+    loginMsg.textContent = `Bienvenido, ${data.nombre} 🎉`;
+    loginMsg.className = 'loginCard__msg loginCard__msg--ok';
+    setTimeout(() => { window.location.href = '../index.html'; }, 1200);
+  });
+</script>
+</body>
+</html>

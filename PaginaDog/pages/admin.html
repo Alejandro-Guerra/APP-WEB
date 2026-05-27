@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar | Panel Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__logo">🐾</span>
+      <span class="brand__name">PetHogar</span>
+    </a>
+    <nav class="menu">
+      <a class="menu__link" href="../index.html">Inicio</a>
+      <a class="menu__link" href="adopta.html">Adopta</a>
+      <a class="menu__link" href="donaciones.html">Donaciones</a>
+      <a class="menu__link is-active" href="admin.html" id="adminNavLink">⚙ Admin</a>
+    </nav>
+    <button class="burger" id="burgerBtn">☰</button>
+  </div>
+  <div class="mobile" id="mobileMenu">
+    <a href="../index.html">Inicio</a>
+    <a href="adopta.html">Adopta</a>
+    <a href="donaciones.html">Donaciones</a>
+    <a href="admin.html">⚙ Admin</a>
+  </div>
+</header>
+
+<main class="adminPage">
+  <div class="container">
+
+    <!-- Encabezado -->
+    <div class="adminHeader">
+      <div>
+        <h1 class="adminHeader__title">Panel de administración</h1>
+        <p class="adminHeader__sub">Gestiona mascotas, donaciones y usuarios.</p>
+      </div>
+      <button class="btn btn--ghost" id="logoutAdmin">Cerrar sesión</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="adminStats" id="adminStats">
+      <div class="adminStat"><span class="adminStat__num" id="sMascotas">—</span><span>Mascotas</span></div>
+      <div class="adminStat"><span class="adminStat__num" id="sDisponibles">—</span><span>Disponibles</span></div>
+      <div class="adminStat"><span class="adminStat__num" id="sAdoptados">—</span><span>Adoptados</span></div>
+      <div class="adminStat"><span class="adminStat__num" id="sDonaciones">—</span><span>Donaciones</span></div>
+      <div class="adminStat"><span class="adminStat__num" id="sTotalDonado">—</span><span>Total donado $MXN</span></div>
+      <div class="adminStat"><span class="adminStat__num" id="sUsuarios">—</span><span>Usuarios</span></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="adminTabs">
+      <button class="adminTab is-active" data-tab="mascotas">🐾 Mascotas</button>
+      <button class="adminTab" data-tab="donaciones">💜 Donaciones</button>
+      <button class="adminTab" data-tab="usuarios">👤 Usuarios</button>
+    </div>
+
+    <!-- Panel: Mascotas -->
+    <div class="adminPanel is-active" id="tab-mascotas">
+
+      <!-- Formulario agregar mascota -->
+      <div class="adminCard" style="margin-bottom:20px">
+        <h2 class="adminCard__title">Agregar nueva mascota</h2>
+        <form id="addPetForm" class="addPetForm">
+          <div class="addPetGrid">
+            <label class="field"><span>Nombre *</span><input id="pNombre" type="text" placeholder="Ej: Luna" required /></label>
+            <label class="field">
+              <span>Tipo *</span>
+              <select id="pTipo" required>
+                <option value="">Selecciona</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Tamaño *</span>
+              <select id="pTamano" required>
+                <option value="">Selecciona</option>
+                <option value="Pequeño">Pequeño</option>
+                <option value="Mediano">Mediano</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Sexo *</span>
+              <select id="pSexo" required>
+                <option value="">Selecciona</option>
+                <option value="Macho">Macho</option>
+                <option value="Hembra">Hembra</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Edad *</span>
+              <select id="pEdad" required>
+                <option value="">Selecciona</option>
+                <option value="Cachorro">Cachorro</option>
+                <option value="Joven">Joven</option>
+                <option value="Adulto">Adulto</option>
+              </select>
+            </label>
+            <label class="field"><span>Ubicación *</span><input id="pUbicacion" type="text" placeholder="Ej: Cancún" required /></label>
+            <label class="field" style="grid-column:1/-1"><span>Descripción</span><input id="pDesc" type="text" placeholder="Breve descripción" /></label>
+            <label class="field" style="grid-column:1/-1"><span>URL de imagen</span><input id="pImagen" type="text" placeholder="../imagenes/nombre.jpeg" /></label>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:4px">
+            <button class="btn btn--secondary" type="submit">Agregar mascota</button>
+            <p class="adminMsg" id="addPetMsg" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabla mascotas -->
+      <div class="adminCard">
+        <h2 class="adminCard__title">Mascotas registradas</h2>
+        <div class="tableWrap">
+          <table class="adminTable" id="tblMascotas">
+            <thead>
+              <tr><th>ID</th><th>Nombre</th><th>Tipo</th><th>Edad</th><th>Ubicación</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="bodyMascotas"><tr><td colspan="7" class="tdCenter">Cargando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Donaciones -->
+    <div class="adminPanel" id="tab-donaciones">
+      <div class="adminCard">
+        <h2 class="adminCard__title">Donaciones recibidas</h2>
+        <div class="tableWrap">
+          <table class="adminTable" id="tblDonaciones">
+            <thead>
+              <tr><th>ID</th><th>Nombre</th><th>Correo</th><th>Monto</th><th>Tipo</th><th>Método</th><th>Fecha</th></tr>
+            </thead>
+            <tbody id="bodyDonaciones"><tr><td colspan="7" class="tdCenter">Cargando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Usuarios -->
+    <div class="adminPanel" id="tab-usuarios">
+      <div class="adminCard">
+        <h2 class="adminCard__title">Usuarios registrados</h2>
+        <div class="tableWrap">
+          <table class="adminTable" id="tblUsuarios">
+            <thead>
+              <tr><th>ID</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Registro</th></tr>
+            </thead>
+            <tbody id="bodyUsuarios"><tr><td colspan="5" class="tdCenter">Cargando...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© <span id="year"></span> PetHogar • Panel Admin</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+// ── Protección: solo admin puede entrar ───────────────────────
+const usuario = JSON.parse(localStorage.getItem('ph_usuario') || 'null');
+if (!usuario || usuario.rol !== 'admin') {
+  alert('Acceso restringido. Solo administradores.');
+  window.location.href = 'login.html';
+}
+
+document.getElementById('logoutAdmin').addEventListener('click', () => {
+  localStorage.removeItem('ph_usuario');
+  window.location.href = '../index.html';
+});
+
+// ── Tabs ──────────────────────────────────────────────────────
+document.querySelectorAll('.adminTab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.adminTab').forEach(b => b.classList.remove('is-active'));
+    document.querySelectorAll('.adminPanel').forEach(p => p.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('is-active');
+  });
+});
+
+// ── Stats ─────────────────────────────────────────────────────
+async function loadStats() {
+  const res  = await fetch('../api/admin.php?action=stats');
+  const data = await res.json();
+  document.getElementById('sMascotas').textContent    = data.mascotas;
+  document.getElementById('sDisponibles').textContent = data.disponibles;
+  document.getElementById('sAdoptados').textContent   = data.adoptados;
+  document.getElementById('sDonaciones').textContent  = data.donaciones;
+  document.getElementById('sTotalDonado').textContent = '$' + data.total_donado;
+  document.getElementById('sUsuarios').textContent    = data.usuarios;
+}
+
+// ── Mascotas ──────────────────────────────────────────────────
+async function loadMascotas() {
+  const res  = await fetch('../api/admin.php?action=mascotas');
+  const list = await res.json();
+  const body = document.getElementById('bodyMascotas');
+
+  if (!list.length) { body.innerHTML = '<tr><td colspan="7" class="tdCenter">Sin mascotas.</td></tr>'; return; }
+
+  body.innerHTML = list.map(p => `
+    <tr id="row-${p.id}">
+      <td>${p.id}</td>
+      <td><strong>${p.nombre}</strong></td>
+      <td>${p.tipo}</td>
+      <td>${p.edad}</td>
+      <td>${p.ubicacion}</td>
+      <td>
+        <span class="statusBadge ${p.estado === 'Disponible' ? 'statusBadge--ok' : 'statusBadge--off'}">
+          ${p.estado}
+        </span>
+      </td>
+      <td class="tdActions">
+        <button class="btn btn--ghost btnSm" onclick="toggleEstado(${p.id}, '${p.estado}')">
+          ${p.estado === 'Disponible' ? 'Marcar adoptado' : 'Marcar disponible'}
+        </button>
+        <button class="btn btn--danger btnSm" onclick="deleteMascota(${p.id}, '${p.nombre}')">Eliminar</button>
+      </td>
+    </tr>`).join('');
+}
+
+async function toggleEstado(id, estadoActual) {
+  const nuevo = estadoActual === 'Disponible' ? 'Adoptado' : 'Disponible';
+  await fetch('../api/admin.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'update_mascota', id, estado: nuevo })
+  });
+  loadMascotas();
+  loadStats();
+}
+
+async function deleteMascota(id, nombre) {
+  if (!confirm(`¿Eliminar a ${nombre}?`)) return;
+  await fetch('../api/admin.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'delete_mascota', id })
+  });
+  loadMascotas();
+  loadStats();
+}
+
+// ── Agregar mascota ───────────────────────────────────────────
+document.getElementById('addPetForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const msg = document.getElementById('addPetMsg');
+  msg.textContent = 'Guardando...';
+
+  const res  = await fetch('../api/admin.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      action:      'add_mascota',
+      nombre:      document.getElementById('pNombre').value.trim(),
+      tipo:        document.getElementById('pTipo').value,
+      tamano:      document.getElementById('pTamano').value,
+      sexo:        document.getElementById('pSexo').value,
+      edad:        document.getElementById('pEdad').value,
+      ubicacion:   document.getElementById('pUbicacion').value.trim(),
+      descripcion: document.getElementById('pDesc').value.trim(),
+      imagen:      document.getElementById('pImagen').value.trim(),
+      estado:      'Disponible'
+    })
+  });
+  const data = await res.json();
+
+  if (data.error) {
+    msg.textContent = data.error;
+    msg.style.color = 'var(--primary)';
+    return;
+  }
+
+  msg.textContent = '¡Mascota agregada!';
+  msg.style.color = 'var(--accent)';
+  e.target.reset();
+  loadMascotas();
+  loadStats();
+  setTimeout(() => { msg.textContent = ''; }, 2500);
+});
+
+// ── Donaciones ────────────────────────────────────────────────
+async function loadDonaciones() {
+  const res  = await fetch('../api/admin.php?action=donaciones');
+  const list = await res.json();
+  const body = document.getElementById('bodyDonaciones');
+
+  if (!list.length) { body.innerHTML = '<tr><td colspan="7" class="tdCenter">Sin donaciones aún.</td></tr>'; return; }
+
+  body.innerHTML = list.map(d => `
+    <tr>
+      <td>${d.id}</td>
+      <td>${d.nombre}</td>
+      <td>${d.correo}</td>
+      <td><strong>$${parseFloat(d.monto).toFixed(2)}</strong></td>
+      <td>${d.tipo}</td>
+      <td>${d.metodo}</td>
+      <td>${d.created_at?.substring(0,10) ?? '—'}</td>
+    </tr>`).join('');
+}
+
+// ── Usuarios ──────────────────────────────────────────────────
+async function loadUsuarios() {
+  const res  = await fetch('../api/admin.php?action=usuarios');
+  const list = await res.json();
+  const body = document.getElementById('bodyUsuarios');
+
+  if (!list.length) { body.innerHTML = '<tr><td colspan="5" class="tdCenter">Sin usuarios.</td></tr>'; return; }
+
+  body.innerHTML = list.map(u => `
+    <tr>
+      <td>${u.id}</td>
+      <td>${u.nombre}</td>
+      <td>${u.correo}</td>
+      <td><span class="statusBadge ${u.rol === 'admin' ? 'statusBadge--admin' : 'statusBadge--user'}">${u.rol}</span></td>
+      <td>${u.created_at?.substring(0,10) ?? '—'}</td>
+    </tr>`).join('');
+}
+
+// ── Iniciar todo ──────────────────────────────────────────────
+loadStats();
+loadMascotas();
+loadDonaciones();
+loadUsuarios();
+</script>
+</body>
+</html>

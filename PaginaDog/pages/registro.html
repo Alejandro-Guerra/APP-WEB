@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetHogar | Registro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__logo">🐾</span>
+      <span class="brand__name">PetHogar</span>
+    </a>
+    <nav class="menu">
+      <a class="menu__link" href="../index.html">Inicio</a>
+      <a class="menu__link" href="adopta.html">Adopta</a>
+      <a class="menu__link" href="productos.html">Productos</a>
+      <a class="menu__link" href="comunidad.html">Comunidad</a>
+      <a class="menu__link" href="refugios.html">Refugios</a>
+      <a class="menu__link" href="donaciones.html">Donaciones</a>
+    </nav>
+    <button class="burger" id="burgerBtn">☰</button>
+  </div>
+  <div class="mobile" id="mobileMenu">
+    <a href="../index.html">Inicio</a>
+    <a href="adopta.html">Adopta</a>
+    <a href="productos.html">Productos</a>
+    <a href="comunidad.html">Comunidad</a>
+    <a href="refugios.html">Refugios</a>
+    <a href="donaciones.html">Donaciones</a>
+  </div>
+</header>
+
+<main>
+  <section class="authPage">
+    <div class="container authPage__inner">
+      <div class="authCard">
+        <h1 class="authCard__title">Crear cuenta</h1>
+        <p class="authCard__sub">Únete a la comunidad PetHogar</p>
+
+        <form id="regForm" class="authForm">
+          <label class="field">
+            <span>Nombre completo *</span>
+            <input id="rNombre" type="text" placeholder="Ej: Alejandro Guerra" required />
+          </label>
+
+          <label class="field">
+            <span>Correo *</span>
+            <input id="rCorreo" type="email" placeholder="ejemplo@correo.com" required />
+          </label>
+
+          <label class="field">
+            <span>Contraseña * (mínimo 6 caracteres)</span>
+            <input id="rPass" type="password" placeholder="Crea una contraseña" required />
+          </label>
+
+          <label class="field">
+            <span>Confirmar contraseña *</span>
+            <input id="rPass2" type="password" placeholder="Repite la contraseña" required />
+          </label>
+
+          <button class="btn btn--primary" type="submit" style="width:100%">Registrarme</button>
+
+          <p class="authMsg" id="regMsg" aria-live="polite"></p>
+        </form>
+
+        <p class="authSwitch">
+          ¿Ya tienes cuenta?
+          <a href="login.html">Inicia sesión aquí</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© <span id="year"></span> PetHogar • Proyecto escolar</p>
+    <p class="muted">Conectando mascotas con familias responsables.</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+  const regForm = document.getElementById('regForm');
+  const regMsg  = document.getElementById('regMsg');
+
+  regForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    regMsg.textContent = '';
+    regMsg.className = 'authMsg';
+
+    const pass  = document.getElementById('rPass').value;
+    const pass2 = document.getElementById('rPass2').value;
+
+    if (pass !== pass2) {
+      regMsg.textContent = 'Las contraseñas no coinciden.';
+      regMsg.className = 'authMsg authMsg--error';
+      return;
+    }
+
+    regMsg.textContent = 'Registrando...';
+
+    const res  = await fetch('../api/usuarios.php', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action:   'registro',
+        nombre:   document.getElementById('rNombre').value.trim(),
+        correo:   document.getElementById('rCorreo').value.trim(),
+        password: pass
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+      regMsg.textContent = data.error;
+      regMsg.className = 'authMsg authMsg--error';
+      return;
+    }
+
+    localStorage.setItem('ph_usuario', JSON.stringify({ id: data.id, nombre: data.nombre }));
+    regMsg.textContent = `Cuenta creada. Bienvenido, ${data.nombre}! Redirigiendo...`;
+    regMsg.className = 'authMsg authMsg--ok';
+    setTimeout(() => { window.location.href = '../index.html'; }, 1400);
+  });
+</script>
+</body>
+</html>
